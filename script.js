@@ -32,13 +32,13 @@ const categoriesData = {
     },
     saucissons: {
         items: [
-            { name: "Nature", price: 4.50 },
-            { name: "Sanglier", price: 4.50 },
-            { name: "Basilic", price: 4.50 },
-            { name: "Beaufort", price: 4.50 },
-            { name: "Herbes", price: 4.50 },
-            { name: "Piment", price: 4.50 },
-            { name: "Noisette", price: 4.50 }
+            { name: "Sauc. nature", price: 4.50 },
+            { name: "Sauc. sanglier", price: 4.50 },
+            { name: "Sauc. basilic", price: 4.50 },
+            { name: "Sauc. Beaufort", price: 4.50 },
+            { name: "Sauc. herbes", price: 4.50 },
+            { name: "Sauc. piment espelette", price: 4.50 },
+            { name: "Sauc. noisette", price: 4.50 }
         ]
     },
     sansAlcool: {
@@ -169,6 +169,11 @@ function addToTicket(label, price) {
     updateTicket();
 }
 
+function removeLine(index) {
+    ticket.splice(index, 1);
+    updateTicket();
+}
+
 function updateTicket() {
     const list = document.getElementById("ticketList");
     list.innerHTML = "";
@@ -177,12 +182,44 @@ function updateTicket() {
         li.textContent = item;
         list.appendChild(li);
     });
+
+    // ✅ Réajuste les prix si nécessaire
+    adjustSaucissonPrices();
+
     updateTotal();
 }
+
 // Optionnel : vider le ticket en un clic
 function clearTicket() {
     ticket.length = 0;
     updateTicket();
+}
+
+// gestion qtt saucisson
+if (saucissonCount >= 3) {
+    ticket.push("💡 Prix réduit appliqué : 4,00 € par saucisson");
+}
+
+function adjustSaucissonPrices() {
+    let saucissonCount = 0;
+
+    // 1. Compter les saucissons
+    ticket.forEach(line => {
+        if (line.startsWith("Sauc.")) {
+            saucissonCount++;
+        }
+    });
+
+    // 2. Déterminer le bon prix
+    const newPrice = saucissonCount >= 3 ? 4.00 : 4.50;
+
+    // 3. Mettre à jour les lignes
+    ticket.forEach((line, index) => {
+        if (line.startsWith("Sauc.")) {
+            const label = line.split("–")[0].trim(); // "Saucisson (Beaufort)"
+            ticket[index] = `${label} – ${newPrice.toFixed(2)}€`;
+        }
+    });
 }
 
 
