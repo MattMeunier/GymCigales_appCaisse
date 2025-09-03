@@ -170,28 +170,79 @@ function selectOption(item, opt) {
 // === Gestion du ticket ===
 function addToTicket(label, price) {
     ticket.push(`${label} – ${price.toFixed(2)}€`);
+    // ✅ Réajuste les prix si nécessaire
+    adjustSaucissonPrices();
     updateTicket();
 }
 
 function removeLine(index) {
     ticket.splice(index, 1);
+    // ✅ Réajuste les prix si nécessaire
+    adjustSaucissonPrices();
     updateTicket();
 }
 
 function updateTicket() {
-    const list = document.getElementById("ticketList");
-    list.innerHTML = "";
-    ticket.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        li.onclick = () => removeLine(index);
-        list.appendChild(li);
+    // const list = document.getElementById("ticketList");
+    // list.innerHTML = "";
+    // ticket.forEach(item => {
+    //     const li = document.createElement("li");
+    //     li.textContent = item;
+    //     li.onclick = () => removeLine(index);
+    //     list.appendChild(li);
+    // });
+    // updateTotal();
+
+    const ticketBody = document.getElementById("ticket-body");
+    ticketBody.innerHTML = "";
+
+    ticket.forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.dataset.index = index;
+
+        // Libellé
+        const libelleCell = document.createElement("td");
+        libelleCell.textContent = item.label;
+        row.appendChild(libelleCell);
+
+        // Quantité modifiable
+        const quantiteCell = document.createElement("td");
+        const input = document.createElement("input");
+        input.type = "number";
+        input.min = "1";
+        input.value = item.quantity;
+        input.classList.add("quantite-input");
+        input.addEventListener("change", (e) => {
+            const newQty = parseInt(e.target.value);
+            if (newQty > 0) {
+                item.quantity = newQty;
+                adjustSaucissonPrices(); // gestion promo
+                updateTicket();
+            }
+        });
+        quantiteCell.appendChild(input);
+        row.appendChild(quantiteCell);
+
+        // Prix
+        const prixCell = document.createElement("td");
+        prixCell.textContent = (item.price * item.quantity).toFixed(2) + " €";
+        row.appendChild(prixCell);
+
+        // Supprimer
+        const deleteCell = document.createElement("td");
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "🗑️";
+        deleteBtn.classList.add("btn-supprimer");
+        deleteBtn.addEventListener("click", () => {
+            ticket.splice(index, 1);
+            adjustSaucissonPrices();
+            updateTicket();
+        });
+        deleteCell.appendChild(deleteBtn);
+        row.appendChild(deleteCell);
+
+        ticketBody.appendChild(row);
     });
-
-    // ✅ Réajuste les prix si nécessaire
-    adjustSaucissonPrices();
-
-    updateTotal();
 }
 
 // Optionnel : vider le ticket en un clic

@@ -25,11 +25,24 @@
     </div>
 
     <!-- Ticket vide au départ -->
-    <div id="ticket">
-        <h3>🧾 Ticket</h3>
-        <ul id="ticketList"></ul>
+    <section id="ticket">
+        <h2>🧾 Ticket</h2>
+        <!-- <ul id="ticketList"></ul> -->
+        <table id="ticket-table">
+            <thead>
+                <tr>
+                    <th>Libellé</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody id="ticket-body">
+                <!-- Les lignes du ticket seront injectées ici -->
+            </tbody>
+        </table>
         <div id="ticket-summary"> Total ticket : <span id="ticket-total">0.00</span> € </div>
-    </div>
+    </section>
 
 
     <div id="payment-section">
