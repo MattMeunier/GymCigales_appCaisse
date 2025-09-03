@@ -5,59 +5,62 @@ let formuleMode = false;
 const categoriesData = {
     biere: {
         items: [
-            { name: "Pint", price: 5.00 },
-            { name: "Demi", price: 3.00 },
-            { name: "Pichet", price: 10.00 }
+            { category: "Bière", name: "Verre", price: 3.00 },
+            { category: "Bière", name: "Pichet", price: 10.00 },
+            { category: "Bière", name: "Pichet + Saucisson", price: 12.00 },
+            { category: "Bière", name: "Panaché", price: 3.00 },
+            { category: "Bière", name: "Demi-Pêche", price: 3.00 },
+            { category: "Bière", name: "Monaco", price: 3.00 }
         ],
         options: null
     },
     vins: {
         items: [
             {
-                name: "Blanc", price: null, options: [
-                    { name: "Verre", price: 2.5 },
-                    { name: "Bouteille", price: 6.5 }]
+                category: "Vin", name: "Blanc", price: null, options: [
+                    { category: "Vin blanc", name: "Verre", price: 2.5 },
+                    { category: "Vin blanc", name: "Bouteille", price: 6.5 }]
             },
             {
-                name: "Rouge", price: null, options: [
-                    { name: "Verre", price: 2.5 },
-                    { name: "Bouteille", price: 6.5 }]
+                category: "Vin", name: "Rouge", price: null, options: [
+                    { category: "Vin rouge", name: "Verre", price: 2.5 },
+                    { category: "Vin rouge", name: "Bouteille", price: 6.5 }]
             },
             {
-                name: "Rosé", price: null, options: [
-                    { name: "Verre", price: 2.5 },
-                    { name: "Bouteille", price: 6.5 }]
+                category: "Vin", name: "Rosé", price: null, options: [
+                    { category: "Vin rosé", name: "Verre", price: 2.5 },
+                    { category: "Vin rosé", name: "Bouteille", price: 6.5 }]
             }
         ],
     },
     saucissons: {
         items: [
-            { name: "Sauc. nature", price: 4.50 },
-            { name: "Sauc. sanglier", price: 4.50 },
-            { name: "Sauc. basilic", price: 4.50 },
-            { name: "Sauc. Beaufort", price: 4.50 },
-            { name: "Sauc. herbes", price: 4.50 },
-            { name: "Sauc. piment espelette", price: 4.50 },
-            { name: "Sauc. noisette", price: 4.50 }
+            { category: "Saucisson", name: "Nature", price: 4.50 },
+            { category: "Saucisson", name: "Sanglier", price: 4.50 },
+            { category: "Saucisson", name: "Basilic", price: 4.50 },
+            { category: "Saucisson", name: "Beaufort", price: 4.50 },
+            { category: "Saucisson", name: "Herbes", price: 4.50 },
+            { category: "Saucisson", name: "Piment espelette", price: 4.50 },
+            { category: "Saucisson", name: "Noisette", price: 4.50 }
         ]
     },
     sansAlcool: {
         items: [
-            { name: "Jus de fruit", price: 3.00 },
-            { name: "Soda", price: 2.50 },
+            { category: "", name: "Jus de fruit", price: 3.00 },
+            { category: "", name: "Soda", price: 2.50 },
             {
-                name: "Sirop", price: 1.5, options: [
-                    { name: "Grenadine", price: null },
-                    { name: "Citron", price: null },
-                    { name: "Menthe", price: null },
-                    { name: "Pêche", price: null },]
+                category: "", name: "Sirop", price: 1.5, options: [
+                    { category: "sirop", name: "Grenadine", price: null },
+                    { category: "sirop", name: "Citron", price: null },
+                    { category: "sirop", ame: "Menthe", price: null },
+                    { category: "sirop", name: "Pêche", price: null },]
             }
         ]
     },
     confiseries: {
         items: [
-            { name: "Bonbons", price: 2.00 },
-            { name: "Chocolat", price: 2.50 }
+            { category: "", name: "Bonbons", price: 2.00 },
+            { category: "", name: "Chocolat", price: 2.50 }
         ],
         options: null
     }
@@ -105,15 +108,15 @@ function openCategoryModal(catId) {
 
         // Affiche le prix si défini
         const label = item.price !== null
-            ? `${item.name} – ${item.price.toFixed(2)}€`
-            : `${item.name}`;
+            ? `${item.category} ${item.name} – ${item.price}€`
+            : `${item.category} ${item.name}`;
 
         btn.textContent = label;
         btn.onclick = () => {
             if (item.options) {
                 openOptionsModal(item);
             } else {
-                addToTicket(item.name, item.price);
+                addToTicket(`${item.category} ${item.name}`, item.price);
                 closeModal();
             }
         };
@@ -135,14 +138,14 @@ function openOptionsModal(item) {
         const btn = document.createElement("button");
 
         // Affiche le prix si défini
-        const label = opt.price !== undefined
-            ? `${opt.label} – ${opt.price.toFixed(2)}€`
-            : opt.label;
+        const label = opt.price !== null
+            ? `${opt.name} – ${opt.price.toFixed(2)}€`
+            : opt.name;
 
         btn.textContent = label;
         btn.onclick = () => {
             const finalPrice = opt.price !== undefined ? opt.price : item.price;
-            addToTicket(`${item.name} (${opt.label})`, finalPrice);
+            addToTicket(`${item.category} ${item.name} (${opt.name})`, finalPrice);
             closeModal();
         };
         body.appendChild(btn);
