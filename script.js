@@ -254,6 +254,7 @@ function updateTicket() {
         ticketBody.appendChild(row);
     });
     updateTotal();
+    updateChange();
 }
 
 // Optionnel : vider le ticket en un clic
@@ -264,26 +265,6 @@ function clearTicket() {
 
 
 function adjustSaucissonPrices() {
-    // let saucissonCount = 0;
-
-    // // 1. Compter les saucissons
-    // ticket.forEach(line => {
-    //     if (line[0].startsWith("Saucisson")) {
-    //         saucissonCount++;
-    //     }
-    // });
-
-    // // 2. Déterminer le bon prix
-    // const newPrice = saucissonCount >= 3 ? 4.00 : 4.50;
-
-    // // 3. Mettre à jour les lignes
-    // ticket.forEach((line, index) => {
-    //     if (line[0].startsWith("Saucisson")) {
-    //         const label = line[0].trim(); // "Saucisson (Beaufort)"
-    //         ticket[index][2] = newPrice.toFixed(2);
-    //     }
-    // });
-
     const totalSaucissons = ticket
         .filter(item => item[0].toLowerCase().includes("saucisson"))
         .reduce((sum, item) => sum + item[1], 0);
@@ -315,10 +296,15 @@ function updateLine(line) {
     line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
 }
 
-function updateChange(total) {
-    const paid = parseFloat(payInput.value) || 0;
+function updateChange() {
+    const total = ticket.reduce((sum, item) => sum + item[2] * item[1], 0);
+    const paidInput = document.getElementById("cash-amount");
+    const changeDisplay = document.getElementById("change-amount");
+
+    const paid = parseFloat(paidInput.value) || 0;
     const change = Math.max(0, paid - total);
-    changeDisplay.textContent = change.toFixed(2);
+
+    changeDisplay.textContent = change.toFixed(2) + " €";
 }
 
 // 2. Fonctions de mise à jour
@@ -343,11 +329,11 @@ function updateTotal() {
     document.getElementById("ticket-total").textContent = total.toFixed(2) + " €";
 }
 
-function updateChange(total) {
-    const paid = parseFloat(payInput.value) || 0;
-    const change = Math.max(0, paid - total);
-    changeDisplay.textContent = change.toFixed(2);
-}
+// function updateChange(total) {
+//     const paid = parseFloat(payInput.value) || 0;
+//     const change = Math.max(0, paid - total);
+//     changeDisplay.textContent = change.toFixed(2);
+// }
 
 // 3. Attacher les événements
 ticketLines.forEach(line => {
@@ -365,6 +351,7 @@ payInput.addEventListener('input', () => {
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("cash-amount").addEventListener("input", updateChange);
     ticketLines.forEach(updateLine);
     updateTotal();
 });

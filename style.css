@@ -164,7 +164,21 @@ button:active {
     text-align: center;
 }
 
-.updated {
-    background-color: #ffeeba;
-    transition: background-color 0.5s ease;
+#payment-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#payment-section input {
+    font-size: 1.2em;
+    padding: 5px;
+    width: 100px;
+    text-align: right;
+    margin-left: 10px;
+}
+
+#payment-section div {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
 }
