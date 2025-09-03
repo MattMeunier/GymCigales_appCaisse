@@ -9,6 +9,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .category,
 .main-menu {
     max-width: 500px;
