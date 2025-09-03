@@ -11,6 +11,11 @@
 
     <h1>🍻 Menu du Bar</h1>
 
+    <!-- Bouton Nouveau ticket -->
+    <button id="newTicketBtn" class="new-ticket-btn" onclick="newTicket()">
+        🆕 Nouveau ticket
+    </button>
+
     <div id="mainMenu" class="main-menu">
         <button onclick="showCategory('biere')">🍺 Bière</button>
         <button onclick="showCategory('vins')">🍷 Vins</button>
@@ -64,16 +69,13 @@
         <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
     </div>
 
-    <!-- Ticket -->
-    <ul id="ticket">
-        <li class="ticket-line" data-price="12.50">
-            <span class="item-name">Café</span><input type="number" class="qty-input" value="1" min="1"><span
-                class="line-total">12.50 €</span>
-        </li>
-        <!-- autres lignes identiques -->
-    </ul>
+    <!-- Ticket vide au départ -->
+    <div id="ticket">
+        <h3>🧾 Ticket</h3>
+        <ul id="ticketList"></ul>
+        <div id="ticket-summary"> Total ticket : <span id="ticket-total">0.00</span> € </div>
+    </div>
 
-    <div id="ticket-summary"> Total ticket : <span id="ticket-total">0.00</span> € </div>
 
     <div id="payment-section">
         Paiement espèce :

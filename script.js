@@ -8,6 +8,7 @@ let selectedParfums = [];
 
 // === Navigation menu / catégories ===
 function showCategory(id) {
+    document.getElementById('newTicketBtn').classList.add('hidden');
     document.getElementById('mainMenu').classList.add('hidden');
     document.querySelectorAll('.category').forEach(div => div.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
@@ -16,6 +17,7 @@ function showCategory(id) {
 function goBack() {
     document.querySelectorAll('.category').forEach(div => div.classList.add('hidden'));
     document.getElementById('mainMenu').classList.remove('hidden');
+    document.getElementById('newTicketBtn').classList.remove('hidden');
 }
 
 // === Gestion du ticket ===
@@ -32,8 +34,8 @@ function updateTicket() {
         li.textContent = item;
         list.appendChild(li);
     });
+    updateTotal();
 }
-
 // Optionnel : vider le ticket en un clic
 function clearTicket() {
     ticket.length = 0;
@@ -115,16 +117,6 @@ function updateLine(line) {
     line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
 }
 
-function updateTicketTotal() {
-    let sum = 0;
-    ticketLines.forEach(line => {
-        const lineTotalText = line.querySelector('.line-total').textContent;
-        sum += parseFloat(lineTotalText);
-    });
-    totalDisplay.textContent = sum.toFixed(2);
-    updateChange(sum);
-}
-
 function updateChange(total) {
     const paid = parseFloat(payInput.value) || 0;
     const change = Math.max(0, paid - total);
@@ -144,13 +136,13 @@ function updateLine(line) {
 }
 
 function updateTicketTotal() {
-    let sum = 0;
-    ticketLines.forEach(line => {
-        const lineTotalText = line.querySelector('.line-total').textContent;
-        sum += parseFloat(lineTotalText);
-    });
-    totalDisplay.textContent = sum.toFixed(2);
-    updateChange(sum);
+    const total = ticket.reduce((sum, line) => {
+        // extrait le nombre et le prix pour faire la somme
+        const match = line.match(/([\d.,]+)€$/);
+        if (match) return sum + parseFloat(match[1].replace(',', '.'));
+        return sum;
+    }, 0);
+    document.getElementById("ticket-total").textContent = total.toFixed(2);
 }
 
 function updateChange(total) {
@@ -161,22 +153,6 @@ function updateChange(total) {
 
 // 3. Attacher les événements
 ticketLines.forEach(line => {
-    // Bouton plus
-    line.querySelector('.qty-plus').addEventListener('click', () => {
-        const input = line.querySelector('.qty-input');
-        input.value = parseInt(input.value, 10) + 1;
-        updateLine(line);
-        updateTicketTotal();
-    });
-
-    // Bouton moins
-    line.querySelector('.qty-minus').addEventListener('click', () => {
-        const input = line.querySelector('.qty-input');
-        input.value = Math.max(1, parseInt(input.value, 10) - 1);
-        updateLine(line);
-        updateTicketTotal();
-    });
-
     // Saisie directe
     line.querySelector('.qty-input').addEventListener('input', () => {
         updateLine(line);
@@ -193,4 +169,49 @@ payInput.addEventListener('input', () => {
 document.addEventListener('DOMContentLoaded', () => {
     ticketLines.forEach(updateLine);
     updateTicketTotal();
+});
+
+const SWIPE_THRESHOLD = 80; // px
+
+ticketLines.forEach(line => {
+    let startX = 0;
+    let deltaX = 0;
+
+    const content = line.querySelector('.content');
+
+    line.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        line.classList.add('swiping');
+    });
+
+    line.addEventListener('touchmove', e => {
+        deltaX = e.touches[0].clientX - startX;
+        // on ne déplace que vers la gauche
+        const translateX = Math.min(0, deltaX);
+        content.style.transform = `translateX(${translateX}px)`;
+    });
+
+    line.addEventListener('touchend', () => {
+        line.classList.remove('swiping');
+
+        if (deltaX < -SWIPE_THRESHOLD) {
+            // suppression animée
+            line.classList.add('removing');
+            content.addEventListener('transitionend', () => {
+                line.remove();
+                updateTicketTotal();
+            }, { once: true });
+
+        } else {
+            // on revient à la position initiale
+            content.style.transform = '';
+        }
+    });
+});
+
+
+// ==== Initialisation ====
+document.addEventListener('DOMContentLoaded', () => {
+    // Au chargement : ticket vide, menu visible, bouton Nouveau ticket caché
+    newTicket();
 });
