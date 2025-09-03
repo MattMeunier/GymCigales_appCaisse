@@ -171,14 +171,14 @@ function closeModal() {
 function addToTicket(label, price) {
     ticket.push([label, 1, price.toFixed(2)]);
     // ✅ Réajuste les prix si nécessaire
-    //adjustSaucissonPrices();
+    adjustSaucissonPrices();
     updateTicket();
 }
 
 function removeLine(index) {
     ticket.splice(index, 1);
     // ✅ Réajuste les prix si nécessaire
-    //adjustSaucissonPrices();
+    adjustSaucissonPrices();
     updateTicket();
 }
 
@@ -202,7 +202,7 @@ function updateTicket() {
 
         // Libellé
         const libelleCell = document.createElement("td");
-        libelleCell.textContent = item.name;
+        libelleCell.textContent = item[0];
         row.appendChild(libelleCell);
 
         // Quantité modifiable
@@ -210,12 +210,12 @@ function updateTicket() {
         const input = document.createElement("input");
         input.type = "number";
         input.min = "1";
-        input.value = item.quantity;
+        input.value = item[1];
         input.classList.add("quantite-input");
         input.addEventListener("change", (e) => {
             const newQty = parseInt(e.target.value);
             if (newQty > 0) {
-                item.quantity = newQty;
+                item[1] = newQty;
                 adjustSaucissonPrices(); // gestion promo
                 updateTicket();
             }
@@ -225,7 +225,7 @@ function updateTicket() {
 
         // Prix
         const prixCell = document.createElement("td");
-        prixCell.textContent = (item.price * item.quantity).toFixed(2) + " €";
+        prixCell.textContent = (item[2] * item[1]).toFixed(2) + " €";
         row.appendChild(prixCell);
 
         // Supprimer
