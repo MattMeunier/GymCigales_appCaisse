@@ -21,52 +21,33 @@
         <button onclick="showCategory('vins')">🍷 Vins</button>
         <button onclick="showCategory('saucissons')">🧂 Saucissons</button>
         <button onclick="showCategory('sansAlcool')">🧃 Sans alcool</button>
-        <button onclick="showCategory('confiseries')">🍬 Confiseries / Pâtisseries</button>
+        <button onclick="showCategory('confiseries')">🍬 Confiseries</button>
     </div>
 
-    <!-- Catégories -->
+    <!-- Chaque catégorie ne contient plus que son conteneur d’items + bouton Retour -->
     <div id="biere" class="category hidden">
-        <h2>🍺 Bière</h2>
-        <button onclick="addToTicket('Verre de bière - 3€')">Verre - 3€</button>
-        <button onclick="addToTicket('Pichet de bière - 10€')">Pichet - 10€</button>
-        <button onclick="addFormulePichetSaucisson()">Formule Pichet + Saucisson - 12€</button>
-        <button onclick="addToTicket('Panaché / Monaco / Demi-pêche - 3,50€')">Panaché / Monaco / Demi-pêche -
-            3,50€</button>
-        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+        <div id="biereItems" class="items-container"></div>
+        <button class="back-btn" onclick="goBack()">← Retour</button>
     </div>
 
     <div id="vins" class="category hidden">
-        <h2>🍷 Vins</h2>
-        <button onclick="addToTicket('Blanc sec - 1€/verre | 6,30€/bouteille')">Blanc sec</button>
-        <button onclick="addToTicket('Blanc layon - 1,50€/verre | 8,40€/bouteille')">Blanc layon</button>
-        <button onclick="addToTicket('Rosé cabernet - 1€/verre | 5,30€/bouteille')">Rosé cabernet</button>
-        <button onclick="addToTicket('Rouge - 1,50€/verre | 8€/bouteille')">Rouge</button>
-        <button onclick="addToTicket('Blanc crémant - 1,50€/verre | 9,40€/bouteille')">Blanc crémant</button>
-        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+        <div id="vinsItems" class="items-container"></div>
+        <button class="back-btn" onclick="goBack()">← Retour</button>
     </div>
 
     <div id="saucissons" class="category hidden">
-        <h2>🧂 Saucissons</h2>
-        <button onclick="openModal(1)">Saucisson - 4,50€</button>
-        <button onclick="openModal(3)">Lot de 3 - 12€</button>
-        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+        <div id="saucissonsItems" class="items-container"></div>
+        <button class="back-btn" onclick="goBack()">← Retour</button>
     </div>
 
     <div id="sansAlcool" class="category hidden">
-        <h2>🧃 Sans alcool</h2>
-        <button onclick="addToTicket('Thé / Café / Chocolat chaud - 1€')">Thé / Café / Chocolat - 1€</button>
-        <button onclick="addToTicket('Thé glacé / Fanta / Coca / Jus / Diabolo - 2€')">Boissons fraîches - 2€</button>
-        <button onclick="addToTicket('Sirop à l’eau - 1€')">Sirop à l’eau - 1€</button>
-        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+        <div id="sansAlcoolItems" class="items-container"></div>
+        <button class="back-btn" onclick="goBack()">← Retour</button>
     </div>
 
     <div id="confiseries" class="category hidden">
-        <h2>🍬 Confiseries / Pâtisseries</h2>
-        <button onclick="addToTicket('Crêpe nature - 1€')">Crêpe nature - 1€</button>
-        <button onclick="addToTicket('Crêpe sucrée - 1,50€')">Crêpe sucrée - 1,50€</button>
-        <button onclick="addToTicket('Crêpe chocolat - 2€')">Crêpe chocolat - 2€</button>
-        <button onclick="addToTicket('Sachet de bonbons - 1€')">Bonbons - 1€</button>
-        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+        <div id="confiseriesItems" class="items-container"></div>
+        <button class="back-btn" onclick="goBack()">← Retour</button>
     </div>
 
     <!-- Ticket vide au départ -->
@@ -87,8 +68,8 @@
     <!-- Modal -->
     <div id="modal" class="modal hidden">
         <div class="modal-content">
-            <h3>Choisissez le(s) parfum(s)</h3>
-            <div id="parfumButtons"></div>
+            <h3 id="modalTitle"></h3>
+            <div id="modalBody"></div>
             <button class="back-btn" onclick="closeModal()">Annuler</button>
         </div>
     </div>

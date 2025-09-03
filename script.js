@@ -42,59 +42,43 @@ function clearTicket() {
     updateTicket();
 }
 
-// === Modale de sélection de parfum ===
-function openModal(count, isFormule = false) {
-    parfumCount = count;
-    formuleMode = isFormule;
-    selectedParfums = [];
-
+// === Modale générique ===
+function openModal(catId, item) {
+    const data = categoriesData[catId];
     const modal = document.getElementById("modal");
-    const container = document.getElementById("parfumButtons");
+    const title = document.getElementById("modalTitle");
+    const body = document.getElementById("modalBody");
 
-    // Message de consigne
-    container.innerHTML = `
-    <p>Sélectionnez ${count} parfum${count > 1 ? 's' : ''} :</p>
-  `;
+    title.textContent = `Options pour : ${item.name}`;
+    body.innerHTML = "";
 
-    // Création des boutons de parfum
-    parfums.forEach(p => {
-        const btn = document.createElement("button");
-        btn.textContent = p;
-        btn.onclick = () => selectParfum(p);
-        container.appendChild(btn);
-    });
+    if (data.options) {
+        data.options.forEach(opt => {
+            const b = document.createElement("button");
+            b.textContent = opt;
+            b.onclick = () => selectOption(item, opt);
+            body.appendChild(b);
+        });
+    } else {
+        // Pas d’option, on ajoute directement
+        const b = document.createElement("button");
+        b.textContent = "Ajouter";
+        b.onclick = () => selectOption(item, null);
+        body.appendChild(b);
+    }
 
     modal.classList.remove("hidden");
 }
 
 function closeModal() {
     document.getElementById("modal").classList.add("hidden");
-    formuleMode = false;
-    selectedParfums = [];
 }
 
-// Sélection d’un parfum
-function selectParfum(parfum) {
-    // Mode formule (pichet + saucisson à 2€)
-    if (formuleMode) {
-        ticket.push("Pichet de bière - 10€");
-        ticket.push(`Saucisson (formule) - ${parfum} - 2€`);
-        closeModal();
-        updateTicket();
-        return;
-    }
-
-    // Mode classique
-    selectedParfums.push(parfum);
-
-    // Dès qu’on a atteint le nombre de parfums voulu
-    if (selectedParfums.length >= parfumCount) {
-        selectedParfums.forEach((p, i) => {
-            ticket.push(`Saucisson choix ${i + 1} - ${p} - 4,50€`);
-        });
-        closeModal();
-        updateTicket();
-    }
+function selectOption(item, opt) {
+    const label = opt ? `${item.name} (${opt})` : item.name;
+    ticket.push(`${label} – ${item.price.toFixed(2)}€`);
+    updateTicket();
+    closeModal();
 }
 
 
@@ -135,12 +119,10 @@ function updateLine(line) {
     line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
 }
 
-function updateTicketTotal() {
+function updateTotal() {
     const total = ticket.reduce((sum, line) => {
-        // extrait le nombre et le prix pour faire la somme
-        const match = line.match(/([\d.,]+)€$/);
-        if (match) return sum + parseFloat(match[1].replace(',', '.'));
-        return sum;
+        const match = line.match(/([\d.]+)€$/);
+        return match ? sum + parseFloat(match[1]) : sum;
     }, 0);
     document.getElementById("ticket-total").textContent = total.toFixed(2);
 }
@@ -156,19 +138,19 @@ ticketLines.forEach(line => {
     // Saisie directe
     line.querySelector('.qty-input').addEventListener('input', () => {
         updateLine(line);
-        updateTicketTotal();
+        updateTotal();
     });
 });
 
 // Paiement espèce
 payInput.addEventListener('input', () => {
-    updateTicketTotal();
+    updateTotal();
 });
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => {
     ticketLines.forEach(updateLine);
-    updateTicketTotal();
+    updateTotal();
 });
 
 const SWIPE_THRESHOLD = 80; // px
@@ -199,7 +181,7 @@ ticketLines.forEach(line => {
             line.classList.add('removing');
             content.addEventListener('transitionend', () => {
                 line.remove();
-                updateTicketTotal();
+                updateTotal();
             }, { once: true });
 
         } else {
@@ -211,7 +193,82 @@ ticketLines.forEach(line => {
 
 
 // ==== Initialisation ====
-document.addEventListener('DOMContentLoaded', () => {
-    // Au chargement : ticket vide, menu visible, bouton Nouveau ticket caché
+document.addEventListener("DOMContentLoaded", () => {
+    initCategories();
     newTicket();
 });
+// Vide l’état du ticket et revient au menu
+function newTicket() {
+    ticket.length = 0;
+    updateTicket();
+    closeModal();
+    goBack();
+}
+
+
+// État global
+const categoriesData = {
+    biere: {
+        items: [
+            { name: "Pint", price: 5.00 },
+            { name: "Demi", price: 3.00 },
+            { name: "Pichet", price: 10.00 }
+        ],
+        options: null
+    },
+    vins: {
+        items: [
+            { name: "Rouge", price: 6.00 },
+            { name: "Blanc", price: 6.00 },
+            { name: "Rosé", price: 6.00 }
+        ],
+        options: ["Verre", "Bouteille"]
+    },
+    saucissons: {
+        items: [
+            { name: "Saucisson", price: 4.50 }
+        ],
+        options: ["Nature", "Sanglier", "Basilic", "Beaufort", "Herbes", "Piment", "Noisette"]
+    },
+    sansAlcool: {
+        items: [
+            { name: "Jus de fruit", price: 3.00 },
+            { name: "Soda", price: 2.50 }
+        ],
+        options: ["Orange", "Pomme", "Cassis", "Citron"]
+    },
+    confiseries: {
+        items: [
+            { name: "Bonbons", price: 2.00 },
+            { name: "Chocolat", price: 2.50 }
+        ],
+        options: null
+    }
+};
+
+// Initialisation des listes d’items
+function initCategories() {
+    Object.keys(categoriesData).forEach(catId => {
+        const container = document.getElementById(catId + "Items");
+        categoriesData[catId].items.forEach(item => {
+            const btn = document.createElement("button");
+            btn.textContent = `${item.name} – ${item.price.toFixed(2)}€`;
+            btn.onclick = () => openModal(catId, item);
+            container.appendChild(btn);
+        });
+    });
+}
+
+// Affichage / navigation
+function showCategory(id) {
+    document.getElementById("newTicketBtn").classList.add("hidden");
+    document.getElementById("mainMenu").classList.add("hidden");
+    document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+}
+
+function goBack() {
+    document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
+    document.getElementById("mainMenu").classList.remove("hidden");
+    document.getElementById("newTicketBtn").classList.remove("hidden");
+}
