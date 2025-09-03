@@ -1,6 +1,7 @@
 // === Données et état global ===
 const ticket = [];
 let formuleMode = false;
+
 // État global
 const categoriesData = {
     biere: {
@@ -52,8 +53,8 @@ const categoriesData = {
                 category: "", name: "Sirop", price: 1.5, options: [
                     { category: "sirop", name: "Grenadine", price: null },
                     { category: "sirop", name: "Citron", price: null },
-                    { category: "sirop", ame: "Menthe", price: null },
-                    { category: "sirop", name: "Pêche", price: null },]
+                    { category: "sirop", name: "Menthe", price: null },
+                    { category: "sirop", name: "Pêche", price: null }]
             }
         ]
     },
@@ -140,11 +141,11 @@ function openOptionsModal(item) {
         // Affiche le prix si défini
         const label = opt.price !== null
             ? `${opt.name} – ${opt.price.toFixed(2)}€`
-            : opt.name;
+            : `${opt.name} – ${item.price.toFixed(2)}€`;
 
         btn.textContent = label;
         btn.onclick = () => {
-            const finalPrice = opt.price !== undefined ? opt.price : item.price;
+            const finalPrice = opt.price !== null ? opt.price : item.price;
             addToTicket(`${item.category} ${item.name} (${opt.name})`, finalPrice);
             closeModal();
         };
@@ -183,6 +184,7 @@ function updateTicket() {
     ticket.forEach(item => {
         const li = document.createElement("li");
         li.textContent = item;
+        li.onclick = () => removeLine(index);
         list.appendChild(li);
     });
 
@@ -208,7 +210,7 @@ function adjustSaucissonPrices() {
 
     // 1. Compter les saucissons
     ticket.forEach(line => {
-        if (line.startsWith("Sauc.")) {
+        if (line.startsWith("Saucisson")) {
             saucissonCount++;
         }
     });
@@ -218,7 +220,7 @@ function adjustSaucissonPrices() {
 
     // 3. Mettre à jour les lignes
     ticket.forEach((line, index) => {
-        if (line.startsWith("Sauc.")) {
+        if (line.startsWith("Saucisson")) {
             const label = line.split("–")[0].trim(); // "Saucisson (Beaufort)"
             ticket[index] = `${label} – ${newPrice.toFixed(2)}€`;
         }
