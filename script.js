@@ -351,9 +351,12 @@ payInput.addEventListener('input', () => {
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => {
-    ticketLines.forEach(updateLine);
-    updateTotal();
-    document.getElementById("cash-amount").addEventListener("input", updateChange);
+    const paidInput = document.getElementById("cash-amount");
+    if (paidInput) {
+        paidInput.addEventListener("input", updateChange);
+    }
+
+    newTicket(); // initialise le ticket au démarrage
 });
 
 const SWIPE_THRESHOLD = 80; // px
@@ -403,6 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // Vide l’état du ticket et revient au menu
 function newTicket() {
     ticket.length = 0;
+    document.getElementById("cash-amount").value = "";
+    document.getElementById("change-amount").textContent = "0.00 €";
     updateTicket();
     closeModal();
 }
