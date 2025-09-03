@@ -23,7 +23,7 @@ button {
     font-size: 20px;
     padding: 15px;
     margin: 10px 0;
-    width: 100%;
+    /* width: 100%; */
     border: none;
     border-radius: 10px;
     background-color: #0077cc;
@@ -71,6 +71,9 @@ button:active {
 .ticket-line {
     position: relative;
     overflow: hidden;
+    padding: 4px 8px;
+    height: auto;
+    font-size: 14px;
 }
 
 .ticket-line .content {
@@ -108,14 +111,15 @@ button:active {
 
 .modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .modal-content {
@@ -155,13 +159,18 @@ button:active {
     display: table;
     width: 100%;
     border-collapse: collapse;
+    padding: 6px;
+    font-size: 13px;
 }
 
 #ticket-table th,
 #ticket-table td {
     border: 1px solid #ccc;
-    padding: 8px;
+    padding: 6px 8px;
     text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+    border-bottom: 1px solid #ddd;
 }
 
 #payment-section {
@@ -185,4 +194,30 @@ button:active {
     margin-top: 10px;
     font-weight: bold;
     font-size: 1.1em;
+}
+
+/* Boutons en 2 colonnes */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.button-container button {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 120px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+@media (max-width: 480px) {
+    .modal {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 12px;
+    }
 }
