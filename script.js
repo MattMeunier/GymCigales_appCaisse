@@ -21,8 +21,8 @@ function goBack() {
 }
 
 // === Gestion du ticket ===
-function addToTicket(item) {
-    ticket.push(item);
+function addToTicket(label, price) {
+    ticket.push(`${label} – ${price.toFixed(2)}€`);
     updateTicket();
 }
 
@@ -43,31 +43,46 @@ function clearTicket() {
 }
 
 // === Modale générique ===
-function openModal(catId, item) {
+function openCategoryModal(catId) {
     const data = categoriesData[catId];
     const modal = document.getElementById("modal");
-    const title = document.getElementById("modalTitle");
+    document.getElementById("modalTitle").textContent = `Choisissez un article (${capitalize(catId)})`;
     const body = document.getElementById("modalBody");
-
-    title.textContent = `Options pour : ${item.name}`;
     body.innerHTML = "";
 
-    if (data.options) {
-        data.options.forEach(opt => {
-            const b = document.createElement("button");
-            b.textContent = opt;
-            b.onclick = () => selectOption(item, opt);
-            body.appendChild(b);
-        });
-    } else {
-        // Pas d’option, on ajoute directement
-        const b = document.createElement("button");
-        b.textContent = "Ajouter";
-        b.onclick = () => selectOption(item, null);
-        body.appendChild(b);
-    }
+    data.items.forEach(item => {
+        const btn = document.createElement("button");
+        btn.textContent = `${item.name} – ${item.price.toFixed(2)}€`;
+        btn.onclick = () => {
+            if (item.options) {
+                openOptionsModal(item);
+            } else {
+                addToTicket(item.name, item.price);
+                closeModal();
+            }
+        };
+        body.appendChild(btn);
+    });
 
     modal.classList.remove("hidden");
+}
+
+function openOptionsModal(item) {
+    currentItem = item;
+    const modal = document.getElementById("modal");
+    document.getElementById("modalTitle").textContent = `Options pour ${item.name}`;
+    const body = document.getElementById("modalBody");
+    body.innerHTML = "";
+
+    item.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => {
+            addToTicket(`${item.name} (${opt})`, item.price);
+            closeModal();
+        };
+        body.appendChild(btn);
+    });
 }
 
 function closeModal() {
@@ -120,10 +135,9 @@ function updateLine(line) {
 }
 
 function updateTotal() {
-    const total = ticket.reduce((sum, line) => {
-        const match = line.match(/([\d.]+)€$/);
-        return match ? sum + parseFloat(match[1]) : sum;
-    }, 0);
+    const total = ticket
+        .map(l => parseFloat(l.match(/([\d.]+)€$/)[1]))
+        .reduce((a, b) => a + b, 0);
     document.getElementById("ticket-total").textContent = total.toFixed(2);
 }
 
@@ -194,15 +208,14 @@ ticketLines.forEach(line => {
 
 // ==== Initialisation ====
 document.addEventListener("DOMContentLoaded", () => {
-    initCategories();
     newTicket();
 });
+
 // Vide l’état du ticket et revient au menu
 function newTicket() {
     ticket.length = 0;
     updateTicket();
     closeModal();
-    goBack();
 }
 
 
@@ -271,4 +284,10 @@ function goBack() {
     document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
     document.getElementById("mainMenu").classList.remove("hidden");
     document.getElementById("newTicketBtn").classList.remove("hidden");
+}
+
+
+// ==== UTILS ====
+function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }

@@ -17,37 +17,11 @@
     </button>
 
     <div id="mainMenu" class="main-menu">
-        <button onclick="showCategory('biere')">🍺 Bière</button>
-        <button onclick="showCategory('vins')">🍷 Vins</button>
-        <button onclick="showCategory('saucissons')">🧂 Saucissons</button>
-        <button onclick="showCategory('sansAlcool')">🧃 Sans alcool</button>
-        <button onclick="showCategory('confiseries')">🍬 Confiseries</button>
-    </div>
-
-    <!-- Chaque catégorie ne contient plus que son conteneur d’items + bouton Retour -->
-    <div id="biere" class="category hidden">
-        <div id="biereItems" class="items-container"></div>
-        <button class="back-btn" onclick="goBack()">← Retour</button>
-    </div>
-
-    <div id="vins" class="category hidden">
-        <div id="vinsItems" class="items-container"></div>
-        <button class="back-btn" onclick="goBack()">← Retour</button>
-    </div>
-
-    <div id="saucissons" class="category hidden">
-        <div id="saucissonsItems" class="items-container"></div>
-        <button class="back-btn" onclick="goBack()">← Retour</button>
-    </div>
-
-    <div id="sansAlcool" class="category hidden">
-        <div id="sansAlcoolItems" class="items-container"></div>
-        <button class="back-btn" onclick="goBack()">← Retour</button>
-    </div>
-
-    <div id="confiseries" class="category hidden">
-        <div id="confiseriesItems" class="items-container"></div>
-        <button class="back-btn" onclick="goBack()">← Retour</button>
+        <button onclick="openCategoryModal('biere')">🍺 Bière</button>
+        <button onclick="openCategoryModal('vins')">🍷 Vins</button>
+        <button onclick="openCategoryModal('saucissons')">🧂 Saucissons</button>
+        <button onclick="openCategoryModal('sansAlcool')">🧃 Sans alcool</button>
+        <button onclick="openCategoryModal('confiseries')">🍬 Confiseries</button>
     </div>
 
     <!-- Ticket vide au départ -->
