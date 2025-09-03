@@ -243,6 +243,7 @@ function updateTicket() {
 
         ticketBody.appendChild(row);
     });
+    updateTotal();
 }
 
 // Optionnel : vider le ticket en un clic
@@ -312,11 +313,14 @@ function updateLine(line) {
     line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
 }
 
+
 function updateTotal() {
-    const total = ticket
-        .map(l => parseFloat(l.match(/([\d.]+)€$/)[1]))
-        .reduce((a, b) => a + b, 0);
-    document.getElementById("ticket-total").textContent = total.toFixed(2);
+    let total = 0;
+    ticket.forEach(item => {
+        total += item[2] * item[1];
+    });
+
+    document.getElementById("ticket-total").textContent = total.toFixed(2) + " €";
 }
 
 function updateChange(total) {
