@@ -67,6 +67,9 @@ const categoriesData = {
     }
 };
 
+
+init(); // Appel direct
+
 // Initialisation des listes d’items
 function initCategories() {
     Object.keys(categoriesData).forEach(catId => {
@@ -399,9 +402,16 @@ ticketLines.forEach(line => {
 
 
 // ==== Initialisation ====
-document.addEventListener("DOMContentLoaded", () => {
+
+function init() {
+    const paidInput = document.getElementById("cash-amount");
+    if (paidInput) {
+        paidInput.addEventListener("input", updateChange);
+    }
+
     newTicket();
-});
+}
+
 
 // Vide l’état du ticket et revient au menu
 function newTicket() {
@@ -411,8 +421,6 @@ function newTicket() {
     updateTicket();
     closeModal();
 }
-
-
 
 
 // ==== UTILS ====
