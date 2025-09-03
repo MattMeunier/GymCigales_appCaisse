@@ -351,9 +351,9 @@ payInput.addEventListener('input', () => {
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("cash-amount").addEventListener("input", updateChange);
     ticketLines.forEach(updateLine);
     updateTotal();
+    document.getElementById("cash-amount").addEventListener("input", updateChange);
 });
 
 const SWIPE_THRESHOLD = 80; // px
