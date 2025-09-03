@@ -9,7 +9,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.hidden {
+.category.hidden {
     display: none;
 }
 
@@ -83,6 +83,6 @@ button:active {
     padding: 10px 20px;
 }
 
-.hidden {
+.modal.hidden {
     display: none;
 }
