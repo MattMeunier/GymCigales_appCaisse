@@ -68,11 +68,15 @@ function openCategoryModal(catId) {
 }
 
 function openOptionsModal(item) {
-    currentItem = item;
     const modal = document.getElementById("modal");
-    document.getElementById("modalTitle").textContent = `Options pour ${item.name}`;
+    const title = document.getElementById("modalTitle");
     const body = document.getElementById("modalBody");
+
+    // ✅ Affiche la modale
+    modal.classList.remove("hidden");
+
     body.innerHTML = "";
+    title.textContent = `Options pour ${item.name}`;
 
     item.options.forEach(opt => {
         const btn = document.createElement("button");
