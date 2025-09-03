@@ -169,17 +169,27 @@ function closeModal() {
 
 // === Gestion du ticket ===
 function addToTicket(label, price) {
-    ticket.push([label, 1, price.toFixed(2)]);
-    // ✅ Réajuste les prix si nécessaire
+    // Cherche si l'item existe déjà dans le ticket
+    const existingItem = ticket.find(item => item[0] === label);
+
+    if (existingItem) {
+        // Incrémente la quantité
+        existingItem[1] += 1;
+    } else {
+        ticket.push([label, 1, price.toFixed(2)]);
+    }
+    // ✅ Réajuste les prix des saucissons si nécessaire
     adjustSaucissonPrices();
     updateTicket();
 }
 
 function removeLine(index) {
-    ticket.splice(index, 1);
-    // ✅ Réajuste les prix si nécessaire
-    adjustSaucissonPrices();
-    updateTicket();
+    if (confirm("Supprimer cette ligne ?")) {
+        ticket.splice(index, 1);
+        // ✅ Réajuste les prix si nécessaire
+        adjustSaucissonPrices();
+        updateTicket();
+    }
 }
 
 function updateTicket() {
@@ -254,23 +264,33 @@ function clearTicket() {
 
 
 function adjustSaucissonPrices() {
-    let saucissonCount = 0;
+    // let saucissonCount = 0;
 
-    // 1. Compter les saucissons
-    ticket.forEach(line => {
-        if (line[0].startsWith("Saucisson")) {
-            saucissonCount++;
-        }
-    });
+    // // 1. Compter les saucissons
+    // ticket.forEach(line => {
+    //     if (line[0].startsWith("Saucisson")) {
+    //         saucissonCount++;
+    //     }
+    // });
 
-    // 2. Déterminer le bon prix
-    const newPrice = saucissonCount >= 3 ? 4.00 : 4.50;
+    // // 2. Déterminer le bon prix
+    // const newPrice = saucissonCount >= 3 ? 4.00 : 4.50;
 
-    // 3. Mettre à jour les lignes
-    ticket.forEach((line, index) => {
-        if (line[0].startsWith("Saucisson")) {
-            const label = line[0].trim(); // "Saucisson (Beaufort)"
-            ticket[index][2] = newPrice.toFixed(2);
+    // // 3. Mettre à jour les lignes
+    // ticket.forEach((line, index) => {
+    //     if (line[0].startsWith("Saucisson")) {
+    //         const label = line[0].trim(); // "Saucisson (Beaufort)"
+    //         ticket[index][2] = newPrice.toFixed(2);
+    //     }
+    // });
+
+    const totalSaucissons = ticket
+        .filter(item => item[0].toLowerCase().includes("saucisson"))
+        .reduce((sum, item) => sum + item[1], 0);
+
+    ticket.forEach(item => {
+        if (item[0].toLowerCase().includes("saucisson")) {
+            item[2] = totalSaucissons >= 3 ? 4.00 : 4.50;
         }
     });
 }

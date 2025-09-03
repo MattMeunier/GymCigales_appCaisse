@@ -33,15 +33,20 @@
                 <tr>
                     <th>Libellé</th>
                     <th>Quantité</th>
-                    <th>Prix</th>
+                    <th>Montant ligne</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody id="ticket-body">
                 <!-- Les lignes du ticket seront injectées ici -->
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>Total ticket : </strong></td>
+                    <td colspan="2" id="ticket-total">0.00</td>
+                </tr>
+            </tfoot>
         </table>
-        <div id="ticket-summary"> Total ticket : <span id="ticket-total">0.00</span></div>
     </section>
 
 
