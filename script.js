@@ -88,7 +88,7 @@ function selectParfum(parfum) {
     // Dès qu’on a atteint le nombre de parfums voulu
     if (selectedParfums.length >= parfumCount) {
         selectedParfums.forEach((p, i) => {
-            ticket.push(`Saucisson ${i + 1} - ${p} - 4,50€`);
+            ticket.push(`Saucisson choix ${i + 1} - ${p} - 4,50€`);
         });
         closeModal();
         updateTicket();
