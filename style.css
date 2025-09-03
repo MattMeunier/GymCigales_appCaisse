@@ -163,3 +163,8 @@ button:active {
     padding: 8px;
     text-align: center;
 }
+
+.updated {
+    background-color: #ffeeba;
+    transition: background-color 0.5s ease;
+}
