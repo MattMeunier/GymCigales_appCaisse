@@ -240,24 +240,46 @@ const categoriesData = {
     },
     vins: {
         items: [
-            { name: "Rouge", price: 6.00 },
-            { name: "Blanc", price: 6.00 },
-            { name: "Rosé", price: 6.00 }
+            {
+                name: "Blanc", price: null, options: [
+                    { name: "Verre", price: 2.5 },
+                    { name: "Bouteille", price: 6.5 }]
+            },
+            {
+                name: "Rouge", price: null, options: [
+                    { name: "Verre", price: 2.5 },
+                    { name: "Bouteille", price: 6.5 }]
+            },
+            {
+                name: "Rosé", price: null, options: [
+                    { name: "Verre", price: 2.5 },
+                    { name: "Bouteille", price: 6.5 }]
+            }
         ],
-        options: ["Verre", "Bouteille"]
     },
     saucissons: {
         items: [
-            { name: "Saucisson", price: 4.50 }
-        ],
-        options: ["Nature", "Sanglier", "Basilic", "Beaufort", "Herbes", "Piment", "Noisette"]
+            { name: "Nature", price: 4.50 },
+            { name: "Sanglier", price: 4.50 },
+            { name: "Basilic", price: 4.50 },
+            { name: "Beaufort", price: 4.50 },
+            { name: "Herbes", price: 4.50 },
+            { name: "Piment", price: 4.50 },
+            { name: "Noisette", price: 4.50 }
+        ]
     },
     sansAlcool: {
         items: [
             { name: "Jus de fruit", price: 3.00 },
-            { name: "Soda", price: 2.50 }
-        ],
-        options: ["Orange", "Pomme", "Cassis", "Citron"]
+            { name: "Soda", price: 2.50 },
+            {
+                name: "Sirop", price: 1.5, options: [
+                    { name: "Grenadine", price: null },
+                    { name: "Citron", price: null },
+                    { name: "Menthe", price: null },
+                    { name: "Pêche", price: null },]
+            }
+        ]
     },
     confiseries: {
         items: [
