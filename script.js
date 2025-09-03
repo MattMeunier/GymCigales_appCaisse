@@ -57,4 +57,13 @@ function selectParfum(parfum) {
         return;
     }
 
-    ticket.push(`
+    selectedParfums.push(parfum);
+
+    if (selectedParfums.length >= parfumCount) {
+        selectedParfums.forEach((p, i) => {
+            ticket.push(`Saucisson ${i + 1} - ${p} - 4,50€`);
+        });
+        closeModal();
+        updateTicket();
+    }
+}
