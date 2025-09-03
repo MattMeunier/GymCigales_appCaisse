@@ -69,15 +69,20 @@ function openCategoryModal(catId) {
 
 function openOptionsModal(item) {
     const modal = document.getElementById("modal");
-    const title = document.getElementById("modalTitle");
     const body = document.getElementById("modalBody");
+    const title = document.getElementById("modalTitle");
+
+    // ✅ Ferme toute modale ouverte (si nécessaire)
+    closeModal(); // optionnel si tu veux forcer le reset
 
     // ✅ Affiche la modale
     modal.classList.remove("hidden");
 
+    // 🧹 Réinitialise le contenu
     body.innerHTML = "";
-    title.textContent = `Options pour ${item.name}`;
+    title.textContent = item.name;
 
+    // 🧠 Injecte les options
     item.options.forEach(opt => {
         const btn = document.createElement("button");
         btn.textContent = opt;
