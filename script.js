@@ -1,45 +1,93 @@
 // === Données et état global ===
 const ticket = [];
-const parfums = ["Nature", "Sanglier", "Basilic", "Beaufort", "Herbes", "Piment", "Noisette"];
-
-let parfumCount = 1;
 let formuleMode = false;
-let selectedParfums = [];
+// État global
+const categoriesData = {
+    biere: {
+        items: [
+            { name: "Pint", price: 5.00 },
+            { name: "Demi", price: 3.00 },
+            { name: "Pichet", price: 10.00 }
+        ],
+        options: null
+    },
+    vins: {
+        items: [
+            {
+                name: "Blanc", price: null, options: [
+                    { name: "Verre", price: 2.5 },
+                    { name: "Bouteille", price: 6.5 }]
+            },
+            {
+                name: "Rouge", price: null, options: [
+                    { name: "Verre", price: 2.5 },
+                    { name: "Bouteille", price: 6.5 }]
+            },
+            {
+                name: "Rosé", price: null, options: [
+                    { name: "Verre", price: 2.5 },
+                    { name: "Bouteille", price: 6.5 }]
+            }
+        ],
+    },
+    saucissons: {
+        items: [
+            { name: "Nature", price: 4.50 },
+            { name: "Sanglier", price: 4.50 },
+            { name: "Basilic", price: 4.50 },
+            { name: "Beaufort", price: 4.50 },
+            { name: "Herbes", price: 4.50 },
+            { name: "Piment", price: 4.50 },
+            { name: "Noisette", price: 4.50 }
+        ]
+    },
+    sansAlcool: {
+        items: [
+            { name: "Jus de fruit", price: 3.00 },
+            { name: "Soda", price: 2.50 },
+            {
+                name: "Sirop", price: 1.5, options: [
+                    { name: "Grenadine", price: null },
+                    { name: "Citron", price: null },
+                    { name: "Menthe", price: null },
+                    { name: "Pêche", price: null },]
+            }
+        ]
+    },
+    confiseries: {
+        items: [
+            { name: "Bonbons", price: 2.00 },
+            { name: "Chocolat", price: 2.50 }
+        ],
+        options: null
+    }
+};
 
-// === Navigation menu / catégories ===
+// Initialisation des listes d’items
+function initCategories() {
+    Object.keys(categoriesData).forEach(catId => {
+        const container = document.getElementById(catId + "Items");
+        categoriesData[catId].items.forEach(item => {
+            const btn = document.createElement("button");
+            btn.textContent = `${item.name} – ${item.price.toFixed(2)}€`;
+            btn.onclick = () => openModal(catId, item);
+            container.appendChild(btn);
+        });
+    });
+}
+
+// Affichage / navigation
 function showCategory(id) {
-    document.getElementById('newTicketBtn').classList.add('hidden');
-    document.getElementById('mainMenu').classList.add('hidden');
-    document.querySelectorAll('.category').forEach(div => div.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
+    document.getElementById("newTicketBtn").classList.add("hidden");
+    document.getElementById("mainMenu").classList.add("hidden");
+    document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
 }
 
 function goBack() {
-    document.querySelectorAll('.category').forEach(div => div.classList.add('hidden'));
-    document.getElementById('mainMenu').classList.remove('hidden');
-    document.getElementById('newTicketBtn').classList.remove('hidden');
-}
-
-// === Gestion du ticket ===
-function addToTicket(label, price) {
-    ticket.push(`${label} – ${price.toFixed(2)}€`);
-    updateTicket();
-}
-
-function updateTicket() {
-    const list = document.getElementById("ticketList");
-    list.innerHTML = "";
-    ticket.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        list.appendChild(li);
-    });
-    updateTotal();
-}
-// Optionnel : vider le ticket en un clic
-function clearTicket() {
-    ticket.length = 0;
-    updateTicket();
+    document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
+    document.getElementById("mainMenu").classList.remove("hidden");
+    document.getElementById("newTicketBtn").classList.remove("hidden");
 }
 
 // === Modale générique ===
@@ -112,6 +160,29 @@ function selectOption(item, opt) {
     ticket.push(`${label} – ${item.price.toFixed(2)}€`);
     updateTicket();
     closeModal();
+}
+
+
+// === Gestion du ticket ===
+function addToTicket(label, price) {
+    ticket.push(`${label} – ${price.toFixed(2)}€`);
+    updateTicket();
+}
+
+function updateTicket() {
+    const list = document.getElementById("ticketList");
+    list.innerHTML = "";
+    ticket.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+    });
+    updateTotal();
+}
+// Optionnel : vider le ticket en un clic
+function clearTicket() {
+    ticket.length = 0;
+    updateTicket();
 }
 
 
@@ -237,94 +308,6 @@ function newTicket() {
 }
 
 
-// État global
-const categoriesData = {
-    biere: {
-        items: [
-            { name: "Pint", price: 5.00 },
-            { name: "Demi", price: 3.00 },
-            { name: "Pichet", price: 10.00 }
-        ],
-        options: null
-    },
-    vins: {
-        items: [
-            {
-                name: "Blanc", price: null, options: [
-                    { name: "Verre", price: 2.5 },
-                    { name: "Bouteille", price: 6.5 }]
-            },
-            {
-                name: "Rouge", price: null, options: [
-                    { name: "Verre", price: 2.5 },
-                    { name: "Bouteille", price: 6.5 }]
-            },
-            {
-                name: "Rosé", price: null, options: [
-                    { name: "Verre", price: 2.5 },
-                    { name: "Bouteille", price: 6.5 }]
-            }
-        ],
-    },
-    saucissons: {
-        items: [
-            { name: "Nature", price: 4.50 },
-            { name: "Sanglier", price: 4.50 },
-            { name: "Basilic", price: 4.50 },
-            { name: "Beaufort", price: 4.50 },
-            { name: "Herbes", price: 4.50 },
-            { name: "Piment", price: 4.50 },
-            { name: "Noisette", price: 4.50 }
-        ]
-    },
-    sansAlcool: {
-        items: [
-            { name: "Jus de fruit", price: 3.00 },
-            { name: "Soda", price: 2.50 },
-            {
-                name: "Sirop", price: 1.5, options: [
-                    { name: "Grenadine", price: null },
-                    { name: "Citron", price: null },
-                    { name: "Menthe", price: null },
-                    { name: "Pêche", price: null },]
-            }
-        ]
-    },
-    confiseries: {
-        items: [
-            { name: "Bonbons", price: 2.00 },
-            { name: "Chocolat", price: 2.50 }
-        ],
-        options: null
-    }
-};
-
-// Initialisation des listes d’items
-function initCategories() {
-    Object.keys(categoriesData).forEach(catId => {
-        const container = document.getElementById(catId + "Items");
-        categoriesData[catId].items.forEach(item => {
-            const btn = document.createElement("button");
-            btn.textContent = `${item.name} – ${item.price.toFixed(2)}€`;
-            btn.onclick = () => openModal(catId, item);
-            container.appendChild(btn);
-        });
-    });
-}
-
-// Affichage / navigation
-function showCategory(id) {
-    document.getElementById("newTicketBtn").classList.add("hidden");
-    document.getElementById("mainMenu").classList.add("hidden");
-    document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
-    document.getElementById(id).classList.remove("hidden");
-}
-
-function goBack() {
-    document.querySelectorAll(".category").forEach(div => div.classList.add("hidden"));
-    document.getElementById("mainMenu").classList.remove("hidden");
-    document.getElementById("newTicketBtn").classList.remove("hidden");
-}
 
 
 // ==== UTILS ====
