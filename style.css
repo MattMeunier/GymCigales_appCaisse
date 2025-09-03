@@ -9,10 +9,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-.hidden {
-    display: none;
-}
-
 .category,
 .main-menu {
     max-width: 500px;
@@ -81,4 +77,8 @@ button:active {
     margin: 5px;
     width: auto;
     padding: 10px 20px;
+}
+
+.hidden {
+    display: none;
 }
