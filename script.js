@@ -46,13 +46,21 @@ function clearTicket() {
 function openCategoryModal(catId) {
     const data = categoriesData[catId];
     const modal = document.getElementById("modal");
-    document.getElementById("modalTitle").textContent = `Choisissez un article (${capitalize(catId)})`;
+    const title = document.getElementById("modalTitle");
     const body = document.getElementById("modalBody");
+
+    title.textContent = `Choisissez un article (${capitalize(catId)})`;
     body.innerHTML = "";
 
     data.items.forEach(item => {
         const btn = document.createElement("button");
-        btn.textContent = `${item.name} – ${item.price.toFixed(2)}€`;
+
+        // Affiche le prix si défini
+        const label = item.price !== null
+            ? `${item.name} – ${item.price.toFixed(2)}€`
+            : `${item.name}`;
+
+        btn.textContent = label;
         btn.onclick = () => {
             if (item.options) {
                 openOptionsModal(item);
@@ -69,29 +77,30 @@ function openCategoryModal(catId) {
 
 function openOptionsModal(item) {
     const modal = document.getElementById("modal");
-    const body = document.getElementById("modalBody");
     const title = document.getElementById("modalTitle");
+    const body = document.getElementById("modalBody");
 
-    // ✅ Ferme toute modale ouverte (si nécessaire)
-    closeModal(); // optionnel si tu veux forcer le reset
-
-    // ✅ Affiche la modale
-    modal.classList.remove("hidden");
-
-    // 🧹 Réinitialise le contenu
+    title.textContent = `Options pour ${item.name}`;
     body.innerHTML = "";
-    title.textContent = item.name;
 
-    // 🧠 Injecte les options
     item.options.forEach(opt => {
         const btn = document.createElement("button");
-        btn.textContent = opt;
+
+        // Affiche le prix si défini
+        const label = opt.price !== undefined
+            ? `${opt.label} – ${opt.price.toFixed(2)}€`
+            : opt.label;
+
+        btn.textContent = label;
         btn.onclick = () => {
-            addToTicket(`${item.name} (${opt})`, item.price);
+            const finalPrice = opt.price !== undefined ? opt.price : item.price;
+            addToTicket(`${item.name} (${opt.label})`, finalPrice);
             closeModal();
         };
         body.appendChild(btn);
     });
+
+    modal.classList.remove("hidden");
 }
 
 function closeModal() {
