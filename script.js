@@ -2,13 +2,31 @@
 const ticket = [];
 let formuleMode = false;
 
+
+// Sélecteurs
+const ticketLines = document.querySelectorAll('.ticket-line');
+const totalDisplay = document.getElementById('ticket-total');
+const payInput = document.getElementById('payment-amount');
+const changeDisplay = document.getElementById('change-amount');
+
+
 // État global
 const categoriesData = {
     biere: {
         items: [
             { category: "Bière", name: "Verre", price: 3.00 },
             { category: "Bière", name: "Pichet", price: 10.00 },
-            { category: "Bière", name: "Pichet + Saucisson", price: 12.00 },
+            {
+                category: "Bière", name: "Pichet + Saucisson", price: 12.00, options: [
+                    { category: "Pichet + Saucisson", name: "Nature", price: null },
+                    { category: "Pichet + Saucisson", name: "Sanglier", price: null },
+                    { category: "Pichet + Saucisson", name: "Basilic", price: null },
+                    { category: "Pichet + Saucisson", name: "Beaufort", price: null },
+                    { category: "Pichet + Saucisson", name: "Herbes", price: null },
+                    { category: "Pichet + Saucisson", name: "Piment espelette", price: null },
+                    { category: "Pichet + Saucisson", name: "Noisette", price: null }
+                ]
+            },
             { category: "Bière", name: "Panaché", price: 3.00 },
             { category: "Bière", name: "Demi-Pêche", price: 3.00 },
             { category: "Bière", name: "Monaco", price: 3.00 }
@@ -269,23 +287,15 @@ function clearTicket() {
 
 function adjustSaucissonPrices() {
     const totalSaucissons = ticket
-        .filter(item => item[0].toLowerCase().includes("saucisson"))
+        .filter(item => item[0].toLowerCase().startsWith("saucisson"))
         .reduce((sum, item) => sum + item[1], 0);
 
     ticket.forEach(item => {
-        if (item[0].toLowerCase().includes("saucisson")) {
+        if (item[0].toLowerCase().startsWith("saucisson")) {
             item[2] = totalSaucissons >= 3 ? 4.00 : 4.50;
         }
     });
 }
-
-
-// 1. Sélecteurs
-const ticketLines = document.querySelectorAll('.ticket-line');
-const totalDisplay = document.getElementById('ticket-total');
-const payInput = document.getElementById('payment-amount');
-const changeDisplay = document.getElementById('change-amount');
-
 
 // 2. Fonctions de mise à jour
 function updateLine(line) {
