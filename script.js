@@ -94,3 +94,103 @@ function selectParfum(parfum) {
         updateTicket();
     }
 }
+
+
+// 1. Sélecteurs
+const ticketLines = document.querySelectorAll('.ticket-line');
+const totalDisplay = document.getElementById('ticket-total');
+const payInput = document.getElementById('payment-amount');
+const changeDisplay = document.getElementById('change-amount');
+
+
+// 2. Fonctions de mise à jour
+function updateLine(line) {
+    const price = parseFloat(line.dataset.price);
+    const qtyInput = line.querySelector('.qty-input');
+    let qty = parseInt(qtyInput.value, 10);
+    if (qty < 1) qty = 1;
+    qtyInput.value = qty;
+
+    const lineTotal = price * qty;
+    line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
+}
+
+function updateTicketTotal() {
+    let sum = 0;
+    ticketLines.forEach(line => {
+        const lineTotalText = line.querySelector('.line-total').textContent;
+        sum += parseFloat(lineTotalText);
+    });
+    totalDisplay.textContent = sum.toFixed(2);
+    updateChange(sum);
+}
+
+function updateChange(total) {
+    const paid = parseFloat(payInput.value) || 0;
+    const change = Math.max(0, paid - total);
+    changeDisplay.textContent = change.toFixed(2);
+}
+
+// 2. Fonctions de mise à jour
+function updateLine(line) {
+    const price = parseFloat(line.dataset.price);
+    const qtyInput = line.querySelector('.qty-input');
+    let qty = parseInt(qtyInput.value, 10);
+    if (qty < 1) qty = 1;
+    qtyInput.value = qty;
+
+    const lineTotal = price * qty;
+    line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
+}
+
+function updateTicketTotal() {
+    let sum = 0;
+    ticketLines.forEach(line => {
+        const lineTotalText = line.querySelector('.line-total').textContent;
+        sum += parseFloat(lineTotalText);
+    });
+    totalDisplay.textContent = sum.toFixed(2);
+    updateChange(sum);
+}
+
+function updateChange(total) {
+    const paid = parseFloat(payInput.value) || 0;
+    const change = Math.max(0, paid - total);
+    changeDisplay.textContent = change.toFixed(2);
+}
+
+// 3. Attacher les événements
+ticketLines.forEach(line => {
+    // Bouton plus
+    line.querySelector('.qty-plus').addEventListener('click', () => {
+        const input = line.querySelector('.qty-input');
+        input.value = parseInt(input.value, 10) + 1;
+        updateLine(line);
+        updateTicketTotal();
+    });
+
+    // Bouton moins
+    line.querySelector('.qty-minus').addEventListener('click', () => {
+        const input = line.querySelector('.qty-input');
+        input.value = Math.max(1, parseInt(input.value, 10) - 1);
+        updateLine(line);
+        updateTicketTotal();
+    });
+
+    // Saisie directe
+    line.querySelector('.qty-input').addEventListener('input', () => {
+        updateLine(line);
+        updateTicketTotal();
+    });
+});
+
+// Paiement espèce
+payInput.addEventListener('input', () => {
+    updateTicketTotal();
+});
+
+// Initialisation au chargement
+document.addEventListener('DOMContentLoaded', () => {
+    ticketLines.forEach(updateLine);
+    updateTicketTotal();
+});
