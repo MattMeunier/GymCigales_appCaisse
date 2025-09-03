@@ -62,3 +62,12 @@ function resetTicket() {
     document.getElementById('cash').value = '';
     document.getElementById('change').textContent = '0.00';
 }
+
+// Enregistrement du Service Worker pour PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(reg => console.log('✅ Service Worker enregistré', reg))
+            .catch(err => console.error('❌ Échec de l’enregistrement du Service Worker', err));
+    });
+}
