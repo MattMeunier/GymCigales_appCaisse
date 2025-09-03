@@ -3,48 +3,83 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Caisse Bar Association</title>
+    <title>Menu Bar Tactile</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="icons/icon-192.png">
-    <meta name="theme-color" content="#2c3e50">
 </head>
 
 <body>
-    <h1>Bar - Événement</h1>
 
-    <div id="menu">
-        <div class="item"><button onclick="addItem('Bière', 2.5)">Bière - 2,50€</button></div>
-        <div class="item"><button onclick="addItem('Soda', 1.5)">Soda - 1,50€</button></div>
-        <div class="item"><button onclick="addItem('Sandwich', 4)">Sandwich - 4,00€</button></div>
+    <h1>🍻 Menu du Bar</h1>
+
+    <div id="mainMenu" class="main-menu">
+        <button onclick="showCategory('biere')">🍺 Bière</button>
+        <button onclick="showCategory('vins')">🍷 Vins</button>
+        <button onclick="showCategory('saucissons')">🧂 Saucissons</button>
+        <button onclick="showCategory('sansAlcool')">🧃 Sans alcool</button>
+        <button onclick="showCategory('confiseries')">🍬 Confiseries / Pâtisseries</button>
     </div>
 
-    <button onclick="resetTicket()">🧹 Nouveau ticket</button>
+    <!-- Catégories -->
+    <div id="biere" class="category hidden">
+        <h2>🍺 Bière</h2>
+        <button onclick="addToTicket('Verre de bière - 3€')">Verre - 3€</button>
+        <button onclick="addToTicket('Pichet de bière - 10€')">Pichet - 10€</button>
+        <button onclick="addFormulePichetSaucisson()">Formule Pichet + Saucisson - 12€</button>
+        <button onclick="addToTicket('Panaché / Monaco / Demi-pêche - 3,50€')">Panaché / Monaco / Demi-pêche -
+            3,50€</button>
+        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+    </div>
 
-    <div class="ticket">
-        <h2>Ticket</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Article</th>
-                    <th>Prix (€)</th>
-                    <th>Quantité</th>
-                    <th>Total ligne (€)</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="ticketTable"></tbody>
-        </table>
+    <div id="vins" class="category hidden">
+        <h2>🍷 Vins</h2>
+        <button onclick="addToTicket('Blanc sec - 1€/verre | 6,30€/bouteille')">Blanc sec</button>
+        <button onclick="addToTicket('Blanc layon - 1,50€/verre | 8,40€/bouteille')">Blanc layon</button>
+        <button onclick="addToTicket('Rosé cabernet - 1€/verre | 5,30€/bouteille')">Rosé cabernet</button>
+        <button onclick="addToTicket('Rouge - 1,50€/verre | 8€/bouteille')">Rouge</button>
+        <button onclick="addToTicket('Blanc crémant - 1,50€/verre | 9,40€/bouteille')">Blanc crémant</button>
+        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+    </div>
 
-        <p><strong>Total:</strong> <span id="total">0.00</span> €</p>
+    <div id="saucissons" class="category hidden">
+        <h2>🧂 Saucissons</h2>
+        <button onclick="openModal(1)">Saucisson - 4,50€</button>
+        <button onclick="openModal(3)">Lot de 3 - 12€</button>
+        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+    </div>
 
-        <label for="cash">Paiement en espèces (€):</label>
-        <input type="number" id="cash" oninput="calculateChange()" />
-        <p><strong>À rendre:</strong> <span id="change">0.00</span> €</p>
+    <div id="sansAlcool" class="category hidden">
+        <h2>🧃 Sans alcool</h2>
+        <button onclick="addToTicket('Thé / Café / Chocolat chaud - 1€')">Thé / Café / Chocolat - 1€</button>
+        <button onclick="addToTicket('Thé glacé / Fanta / Coca / Jus / Diabolo - 2€')">Boissons fraîches - 2€</button>
+        <button onclick="addToTicket('Sirop à l’eau - 1€')">Sirop à l’eau - 1€</button>
+        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+    </div>
+
+    <div id="confiseries" class="category hidden">
+        <h2>🍬 Confiseries / Pâtisseries</h2>
+        <button onclick="addToTicket('Crêpe nature - 1€')">Crêpe nature - 1€</button>
+        <button onclick="addToTicket('Crêpe sucrée - 1,50€')">Crêpe sucrée - 1,50€</button>
+        <button onclick="addToTicket('Crêpe chocolat - 2€')">Crêpe chocolat - 2€</button>
+        <button onclick="addToTicket('Sachet de bonbons - 1€')">Bonbons - 1€</button>
+        <button class="back-btn" onclick="goBack()">⬅️ Retour</button>
+    </div>
+
+    <!-- Ticket -->
+    <div id="ticket">
+        <h3>🧾 Ticket</h3>
+        <ul id="ticketList"></ul>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Choisissez le(s) parfum(s)</h3>
+            <div id="parfumButtons"></div>
+            <button class="back-btn" onclick="closeModal()">Annuler</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 
 </html>

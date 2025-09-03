@@ -1,73 +1,60 @@
-let ticket = {};
+const ticket = [];
+const parfums = ["Nature", "Sanglier", "Basilic", "Beaufort", "Herbes", "Piment", "Noisette"];
+let parfumCount = 1;
+let formuleMode = false;
 
-function addItem(name, price) {
-    if (ticket[name]) {
-        ticket[name].quantity += 1;
-    } else {
-        ticket[name] = { price: price, quantity: 1 };
-    }
+function showCategory(id) {
+    document.getElementById('mainMenu').classList.add('hidden');
+    document.querySelectorAll('.category').forEach(div => div.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+function goBack() {
+    document.querySelectorAll('.category').forEach(div => div.classList.add('hidden'));
+    document.getElementById('mainMenu').classList.remove('hidden');
+}
+
+function addToTicket(item) {
+    ticket.push(item);
     updateTicket();
 }
 
 function updateTicket() {
-    const table = document.getElementById('ticketTable');
-    table.innerHTML = '';
-    let total = 0;
-
-    for (const [name, data] of Object.entries(ticket)) {
-        const totalLine = data.price * data.quantity;
-        total += totalLine;
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-      <td>${name}</td>
-      <td>${data.price.toFixed(2)}</td>
-      <td>
-        <input type="number" min="1" value="${data.quantity}" onchange="updateQuantity('${name}', this.value)">
-      </td>
-      <td>${totalLine.toFixed(2)}</td>
-      <td><button onclick="removeItem('${name}')">❌ Retirer</button></td>
-    `;
-        table.appendChild(row);
-    }
-
-    document.getElementById('total').textContent = total.toFixed(2);
-    calculateChange();
-}
-
-function updateQuantity(name, value) {
-    const qty = parseInt(value);
-    if (qty > 0) {
-        ticket[name].quantity = qty;
-        updateTicket();
-    }
-}
-
-function removeItem(name) {
-    delete ticket[name];
-    updateTicket();
-}
-
-function calculateChange() {
-    const cash = parseFloat(document.getElementById('cash').value);
-    const total = parseFloat(document.getElementById('total').textContent);
-    const change = cash - total;
-    document.getElementById('change').textContent = change >= 0 ? change.toFixed(2) : '0.00';
-}
-
-function resetTicket() {
-    ticket = {};
-    document.getElementById('ticketTable').innerHTML = '';
-    document.getElementById('total').textContent = '0.00';
-    document.getElementById('cash').value = '';
-    document.getElementById('change').textContent = '0.00';
-}
-
-// Enregistrement du Service Worker pour PWA
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(reg => console.log('✅ Service Worker enregistré', reg))
-            .catch(err => console.error('❌ Échec de l’enregistrement du Service Worker', err));
+    const list = document.getElementById("ticketList");
+    list.innerHTML = "";
+    ticket.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
     });
 }
+
+function openModal(count, isFormule = false) {
+    parfumCount = count;
+    formuleMode = isFormule;
+    document.getElementById("modal").classList.remove("hidden");
+    const container = document.getElementById("parfumButtons");
+    container.innerHTML = "";
+    parfums.forEach(p => {
+        const btn = document.createElement("button");
+        btn.textContent = p;
+        btn.onclick = () => selectParfum(p);
+        container.appendChild(btn);
+    });
+}
+
+function closeModal() {
+    document.getElementById("modal").classList.add("hidden");
+    formuleMode = false;
+}
+
+function selectParfum(parfum) {
+    if (formuleMode) {
+        ticket.push("Pichet de bière - 10€");
+        ticket.push(`Saucisson (formule) - ${parfum} - 2€`);
+        closeModal();
+        updateTicket();
+        return;
+    }
+
+    ticket.push(`
