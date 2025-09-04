@@ -173,7 +173,8 @@ button:active {
     border-bottom: 1px solid #ddd;
 }
 
-#payment-section {
+#payment-section,
+#ticket-total {
     margin-top: 20px;
     padding: 10px;
     background-color: #fff;
@@ -190,7 +191,8 @@ button:active {
     margin-left: 10px;
 }
 
-#payment-section div {
+#payment-section div,
+#ticket-total div {
     margin-top: 10px;
     font-weight: bold;
     font-size: 1.1em;
