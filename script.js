@@ -283,7 +283,7 @@ function updateTicket() {
         input.max = "99";
         input.value = item[1];
         input.classList.add("qty-input");
-        input.addEventListener("input", (e) => {
+        input.addEventListener("change", (e) => {
             const newQty = parseInt(e.target.value);
             if (newQty > 0) {
                 item[1] = newQty;
