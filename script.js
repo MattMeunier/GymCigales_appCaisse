@@ -37,10 +37,10 @@ const changeDisplay = document.getElementById('change-amount');
 const categoriesData = {
     biere: {
         items: [
-            { category: "Bière", name: "Verre", price: 3.00 },
-            { category: "Bière", name: "Pichet", price: 10.00 },
+            { category: "🍺 Bière", name: "Verre", price: 3.00 },
+            { category: "🍻 Bière", name: "Pichet", price: 10.00 },
             {
-                category: "Bière", name: "Pichet + Saucisson", price: 12.00, options: [
+                category: "🍻🍖 Bière", name: "Pichet + Saucisson", price: 12.00, options: [
                     { category: "Pichet + Saucisson", name: "Nature", price: null },
                     { category: "Pichet + Saucisson", name: "Sanglier", price: null },
                     { category: "Pichet + Saucisson", name: "Basilic", price: null },
@@ -50,9 +50,9 @@ const categoriesData = {
                     { category: "Pichet + Saucisson", name: "Noisette", price: null }
                 ]
             },
-            { category: "Bière", name: "Panaché", price: 3.00 },
-            { category: "Bière", name: "Demi-Pêche", price: 3.00 },
-            { category: "Bière", name: "Monaco", price: 3.00 }
+            { category: "🍺", name: "Panaché", price: 3.00 },
+            { category: "🍺", name: "Demi-Pêche", price: 3.00 },
+            { category: "🍺", name: "Monaco", price: 3.00 }
         ],
         options: null
     },
@@ -60,18 +60,18 @@ const categoriesData = {
         items: [
             {
                 category: "Vin", name: "Blanc", price: null, options: [
-                    { category: "Vin blanc", name: "Verre", price: 2.5 },
-                    { category: "Vin blanc", name: "Bouteille", price: 6.5 }]
+                    { category: "Vin blanc", name: "🍷 Verre", price: 2.5 },
+                    { category: "Vin blanc", name: "🍾 Bouteille", price: 6.5 }]
             },
             {
                 category: "Vin", name: "Rouge", price: null, options: [
-                    { category: "Vin rouge", name: "Verre", price: 2.5 },
-                    { category: "Vin rouge", name: "Bouteille", price: 6.5 }]
+                    { category: "Vin rouge", name: "🍷 Verre", price: 2.5 },
+                    { category: "Vin rouge", name: "🍾 Bouteille", price: 6.5 }]
             },
             {
                 category: "Vin", name: "Rosé", price: null, options: [
-                    { category: "Vin rosé", name: "Verre", price: 2.5 },
-                    { category: "Vin rosé", name: "Bouteille", price: 6.5 }]
+                    { category: "Vin rosé", name: "🍷 Verre", price: 2.5 },
+                    { category: "Vin rosé", name: "🍾 Bouteille", price: 6.5 }]
             }
         ],
     },
@@ -88,10 +88,10 @@ const categoriesData = {
     },
     sansAlcool: {
         items: [
-            { category: "", name: "Jus de fruit", price: 3.00 },
-            { category: "", name: "Soda", price: 2.50 },
+            { category: "", name: "🍹 Jus de fruit", price: 3.00 },
+            { category: "", name: "🥤 Soda", price: 2.50 },
             {
-                category: "", name: "Sirop", price: 1.5, options: [
+                category: "", name: "🧉 Sirop", price: 1.5, options: [
                     { category: "sirop", name: "Grenadine", price: null },
                     { category: "sirop", name: "Citron", price: null },
                     { category: "sirop", name: "Menthe", price: null },
@@ -101,8 +101,10 @@ const categoriesData = {
     },
     confiseries: {
         items: [
-            { category: "", name: "Bonbons", price: 2.00 },
-            { category: "", name: "Chocolat", price: 2.50 }
+            { category: "", name: "🍭 Bonbons", price: 1.00 },
+            { category: "", name: "🥞 Crêpes nature", price: 1.00 },
+            { category: "", name: "🥞 Crêpes sucre", price: 1.50 },
+            { category: "", name: "🥞 Crêpes chocolat", price: 2.00 }
         ],
         options: null
     }
