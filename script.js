@@ -283,7 +283,7 @@ function updateTicket() {
         input.max = "99";
         input.value = item[1];
         input.classList.add("qty-input");
-        input.addEventListener("change", (e) => {
+        input.addEventListener("input", (e) => {
             const newQty = parseInt(e.target.value);
             if (newQty > 0) {
                 item[1] = newQty;
@@ -296,7 +296,7 @@ function updateTicket() {
 
         // Prix
         const prixCell = document.createElement("td");
-        input.classList.add("price-cell");
+        prixCell.classList.add("price-cell");
         prixCell.textContent = (item[2] * item[1]).toFixed(2) + " €";
         row.appendChild(prixCell);
 
@@ -383,43 +383,12 @@ function updateTotal() {
     document.getElementById("ticket-total").textContent = total.toFixed(2) + " €";
 }
 
-// function updateChange(total) {
-//     const paid = parseFloat(payInput.value) || 0;
-//     const change = Math.max(0, paid - total);
-//     changeDisplay.textContent = change.toFixed(2);
-// }
-
-// 3. Attacher les événements
-ticketLines.forEach(line => {
-    // Saisie directe
-    line.querySelector('.qty-input').addEventListener('input', () => {
-        updateLine(line);
-        updateTotal();
-    });
-});
-
 // select la quantité quand focus
 document.addEventListener('focusin', event => {
     if (event.target.classList.contains('qty-input')) {
         event.target.select();
     }
 });
-
-// déclenche la maj auto des totaux dès saisie de qtt manuelle
-document.querySelectorAll('.qty-input').forEach(input => {
-    input.addEventListener('input', () => {
-        const row = input.closest('tr');
-        const priceCell = row.querySelector('.price-cell');
-
-        const qty = parseFloat(input.value) || 0;
-        const price = parseFloat(priceCell.textContent) || 0;
-
-        updateTicket(); // met à jour le total du ticket
-        adjustSaucissonPrices();
-        updateChange(); // met à jour le rendu monnaie
-    });
-});
-
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => {
