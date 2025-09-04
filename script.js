@@ -10,11 +10,6 @@ document.cookie.split(";").forEach(cookie => {
 localStorage.clear();
 sessionStorage.clear();
 
-// Optionnel : rechargement sans cache
-if (performance.navigation.type === 1) {
-    location.reload(true);
-}
-
 // Evite le chargement en cache
 const script = document.createElement("script");
 script.src = "/script.js?v=" + Date.now(); // empêche le cache
