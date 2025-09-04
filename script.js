@@ -328,11 +328,11 @@ function clearTicket() {
 
 function adjustSaucissonPrices() {
     const totalSaucissons = ticket
-        .filter(item => item[0].toLowerCase().startsWith("saucisson"))
+        .filter(item => item[0].toLowerCase().includes("saucisson") && !item[0].toLowerCase().includes("pichet"))
         .reduce((sum, item) => sum + item[1], 0);
 
     ticket.forEach(item => {
-        if (item[0].toLowerCase().startsWith("saucisson")) {
+        if (item[0].toLowerCase().includes("saucisson") && !item[0].toLowerCase().includes("pichet")) {
             item[2] = totalSaucissons >= 3 ? 4.00 : 4.50;
         }
     });
