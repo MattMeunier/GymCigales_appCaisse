@@ -5,13 +5,13 @@ function clearAppCookies() {
     });
 }
 
-// function smartReload() {
-//     // Reload une seule fois, sans modifier l'URL
-//     if (!sessionStorage.getItem('hasReloaded')) {
-//         sessionStorage.setItem('hasReloaded', 'true');
-//         window.location.reload(); // simple, sans boucle
-//     }
-// }
+function smartReload() {
+    // Reload une seule fois, sans modifier l'URL
+    if (!sessionStorage.getItem('hasReloaded')) {
+        sessionStorage.setItem('hasReloaded', 'true');
+        window.location.reload(); // simple, sans boucle
+    }
+}
 
 window.addEventListener('DOMContentLoaded', () => {
     clearAppCookies();
