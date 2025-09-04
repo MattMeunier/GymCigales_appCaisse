@@ -280,8 +280,9 @@ function updateTicket() {
         const input = document.createElement("input");
         input.type = "number";
         input.min = "1";
+        input.max = "99";
         input.value = item[1];
-        input.classList.add("quantite-input");
+        input.classList.add("qty-input");
         input.addEventListener("change", (e) => {
             const newQty = parseInt(e.target.value);
             if (newQty > 0) {
@@ -295,6 +296,7 @@ function updateTicket() {
 
         // Prix
         const prixCell = document.createElement("td");
+        input.classList.add("price-cell");
         prixCell.textContent = (item[2] * item[1]).toFixed(2) + " €";
         row.appendChild(prixCell);
 
@@ -396,10 +398,28 @@ ticketLines.forEach(line => {
     });
 });
 
-// Paiement espèce
-payInput.addEventListener('input', () => {
-    updateTotal();
+// select la quantité quand focus
+document.addEventListener('focusin', event => {
+    if (event.target.classList.contains('qty-input')) {
+        event.target.select();
+    }
 });
+
+// déclenche la maj auto des totaux dès saisie de qtt manuelle
+document.querySelectorAll('.qty-input').forEach(input => {
+    input.addEventListener('input', () => {
+        const row = input.closest('tr');
+        const priceCell = row.querySelector('.price-cell');
+
+        const qty = parseFloat(input.value) || 0;
+        const price = parseFloat(priceCell.textContent) || 0;
+
+        updateTicket(); // met à jour le total du ticket
+        adjustSaucissonPrices();
+        updateChange(); // met à jour le rendu monnaie
+    });
+});
+
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => {

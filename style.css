@@ -143,8 +143,7 @@ button:active {
     text-align: center;
 }
 
-.quantite-input {
-    width: 50px;
+.qty-input {
     text-align: center;
 }
 
@@ -171,6 +170,10 @@ button:active {
     font-size: 14px;
     line-height: 1.2;
     border-bottom: 1px solid #ddd;
+}
+
+.qty-input {
+    text-align: center;
 }
 
 #payment-section,
