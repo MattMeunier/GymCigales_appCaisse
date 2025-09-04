@@ -1,3 +1,26 @@
+
+// Nettoyage des cookies
+document.cookie.split(";").forEach(cookie => {
+    document.cookie = cookie
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+});
+
+// Nettoyage du stockage local
+localStorage.clear();
+sessionStorage.clear();
+
+// Optionnel : rechargement sans cache
+if (performance.navigation.type === 1) {
+    location.reload(true);
+}
+
+// Evite le chargement en cache
+const script = document.createElement("script");
+script.src = "/script.js?v=" + Date.now(); // empêche le cache
+document.head.appendChild(script);
+
+
 // === Données et état global ===
 const ticket = [];
 let formuleMode = false;
