@@ -37,7 +37,7 @@ const changeDisplay = document.getElementById('change-amount');
 const categoriesData = {
     biere: {
         items: [
-            { category: "🍺 Bière", name: "Verre", price: 3.00 },
+            { category: "Bière", name: "Verre", price: 3.00 },
             { category: "🍻 Bière", name: "Pichet", price: 10.00 },
             {
                 category: "🍻🍖 Bière", name: "Pichet + Saucisson", price: 12.00, options: [
@@ -50,9 +50,9 @@ const categoriesData = {
                     { category: "Pichet + Saucisson", name: "Noisette", price: null }
                 ]
             },
-            { category: "🍺", name: "Panaché", price: 3.00 },
-            { category: "🍺", name: "Demi-Pêche", price: 3.00 },
-            { category: "🍺", name: "Monaco", price: 3.00 }
+            { category: "", name: "Panaché", price: 3.00 },
+            { category: "", name: "Demi-Pêche", price: 3.00 },
+            { category: "", name: "Monaco", price: 3.00 }
         ],
         options: null
     },
@@ -88,7 +88,7 @@ const categoriesData = {
     },
     sansAlcool: {
         items: [
-            { category: "", name: "🍹 Jus de fruit", price: 3.00 },
+            { category: "", name: "🍹 Jus de fruit", price: 2.00 },
             { category: "", name: "🥤 Soda", price: 2.50 },
             {
                 category: "", name: "🧉 Sirop", price: 1.5, options: [
