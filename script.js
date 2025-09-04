@@ -86,25 +86,42 @@ const categoriesData = {
             { category: "Saucisson", name: "Noisette", price: 4.50 }
         ]
     },
-    sansAlcool: {
+    softs: {
         items: [
+            { category: "", name: "☕ Café", price: 1.00 },
+            { category: "", name: "🍵 Thé", price: 1.00 },
             { category: "", name: "🍹 Jus de fruit", price: 2.00 },
-            { category: "", name: "🥤 Soda", price: 2.50 },
             {
-                category: "", name: "🧉 Sirop", price: 1.5, options: [
-                    { category: "sirop", name: "Grenadine", price: null },
-                    { category: "sirop", name: "Citron", price: null },
-                    { category: "sirop", name: "Menthe", price: null },
-                    { category: "sirop", name: "Pêche", price: null }]
+                category: "", name: "🥤 Soda", price: 2.50, options: [
+                    { category: "", name: "Coca Cola", price: null },
+                    { category: "", name: "Fanta", price: null },
+                    { category: "", name: "Thé glacé", price: null }]
+            },
+            {
+                category: "", name: "🍸 Sirop", price: 1.5, options: [
+                    { category: "", name: "Grenadine", price: null },
+                    { category: "", name: "Citron", price: null },
+                    { category: "", name: "Menthe", price: null },
+                    { category: "", name: "Pêche", price: null }]
+            },
+            {
+                category: "", name: "🧉 Diabolo", price: 2, options: [
+                    { category: "", name: "Grenadine", price: null },
+                    { category: "", name: "Citron", price: null },
+                    { category: "", name: "Menthe", price: null },
+                    { category: "", name: "Pêche", price: null }]
             }
         ]
     },
     confiseries: {
         items: [
             { category: "", name: "🍭 Bonbons", price: 1.00 },
-            { category: "", name: "🥞 Crêpes nature", price: 1.00 },
-            { category: "", name: "🥞 Crêpes sucre", price: 1.50 },
-            { category: "", name: "🥞 Crêpes chocolat", price: 2.00 }
+            {
+                category: "", name: "🥞 Crêpes", price: null, options: [
+                    { category: "Crêpe", name: "Nature", price: 1.00 },
+                    { category: "Crêpe", name: "Sucre", price: 1.50 },
+                    { category: "Crêpe", name: "Chocolat", price: 2 }]
+            }
         ],
         options: null
     }
