@@ -37,90 +37,90 @@ const changeDisplay = document.getElementById('change-amount');
 const categoriesData = {
     biere: {
         items: [
-            { category: "Bière", name: "Verre", price: 3.00 },
-            { category: "🍻 Bière", name: "Pichet", price: 10.00 },
+            { logo: "", category: "🍺 Bière", name: "Verre", price: 3.00 },
+            { logo: "", category: "🍻🍻 Bière", name: "Pichet", price: 10.00 },
             {
-                category: "🍻🍖 Bière", name: "Pichet + Saucisson", price: 12.00, options: [
-                    { category: "Pichet + Saucisson", name: "Nature", price: null },
-                    { category: "Pichet + Saucisson", name: "Sanglier", price: null },
-                    { category: "Pichet + Saucisson", name: "Basilic", price: null },
-                    { category: "Pichet + Saucisson", name: "Beaufort", price: null },
-                    { category: "Pichet + Saucisson", name: "Herbes", price: null },
-                    { category: "Pichet + Saucisson", name: "Piment espelette", price: null },
-                    { category: "Pichet + Saucisson", name: "Noisette", price: null }
+                logo: "", category: "🍻🍖 Bière", name: "Pichet + Saucisson", price: 12.00, options: [
+                    { logo: "", category: "Pichet + Saucisson", name: "Nature", price: null },
+                    { logo: "", category: "Pichet + Saucisson", name: "Sanglier", price: null },
+                    { logo: "", category: "Pichet + Saucisson", name: "Basilic", price: null },
+                    { logo: "", category: "Pichet + Saucisson", name: "Beaufort", price: null },
+                    { logo: "", category: "Pichet + Saucisson", name: "Herbes", price: null },
+                    { logo: "", category: "Pichet + Saucisson", name: "Piment espelette", price: null },
+                    { logo: "", category: "Pichet + Saucisson", name: "Noisette", price: null }
                 ]
             },
-            { category: "", name: "Panaché", price: 3.00 },
-            { category: "", name: "Demi-Pêche", price: 3.00 },
-            { category: "", name: "Monaco", price: 3.00 }
+            { logo: "🍺", category: "", name: "Panaché", price: 3.00 },
+            { logo: "🍺", category: "", name: "Demi-Pêche", price: 3.00 },
+            { logo: "🍺", category: "", name: "Monaco", price: 3.00 }
         ],
         options: null
     },
     vins: {
         items: [
             {
-                category: "Vin", name: "Blanc", price: null, options: [
-                    { category: "Vin blanc", name: "🍷 Verre", price: 2.5 },
-                    { category: "Vin blanc", name: "🍾 Bouteille", price: 6.5 }]
+                logo: "", category: "Vin", name: "Blanc", price: null, options: [
+                    { logo: "🍷", category: "Vin blanc", name: "Verre", price: 2.5 },
+                    { logo: "🍾", category: "Vin blanc", name: "Bouteille", price: 6.5 }]
             },
             {
-                category: "Vin", name: "Rouge", price: null, options: [
-                    { category: "Vin rouge", name: "🍷 Verre", price: 2.5 },
-                    { category: "Vin rouge", name: "🍾 Bouteille", price: 6.5 }]
+                logo: "", category: "Vin", name: "Rouge", price: null, options: [
+                    { logo: "🍷", category: "Vin rouge", name: "Verre", price: 2.5 },
+                    { logo: "🍾", category: "Vin rouge", name: "Bouteille", price: 6.5 }]
             },
             {
-                category: "Vin", name: "Rosé", price: null, options: [
-                    { category: "Vin rosé", name: "🍷 Verre", price: 2.5 },
-                    { category: "Vin rosé", name: "🍾 Bouteille", price: 6.5 }]
+                logo: "", category: "Vin", name: "Rosé", price: null, options: [
+                    { logo: "🍷", category: "Vin rosé", name: "Verre", price: 2.5 },
+                    { logo: "🍾", category: "Vin rosé", name: "Bouteille", price: 6.5 }]
             }
         ],
     },
     saucissons: {
         items: [
-            { category: "Saucisson", name: "Nature", price: 4.50 },
-            { category: "Saucisson", name: "Sanglier", price: 4.50 },
-            { category: "Saucisson", name: "Basilic", price: 4.50 },
-            { category: "Saucisson", name: "Beaufort", price: 4.50 },
-            { category: "Saucisson", name: "Herbes", price: 4.50 },
-            { category: "Saucisson", name: "Piment espelette", price: 4.50 },
-            { category: "Saucisson", name: "Noisette", price: 4.50 }
+            { logo: "🍖", category: "Saucisson", name: "Nature", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Sanglier", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Basilic", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Beaufort", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Herbes", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Piment espelette", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Noisette", price: 4.50 }
         ]
     },
     softs: {
         items: [
-            { category: "", name: "☕ Café", price: 1.00 },
-            { category: "", name: "🍵 Thé", price: 1.00 },
-            { category: "", name: "🍹 Jus de fruit", price: 2.00 },
+            { logo: "", category: "", name: "☕ Café", price: 1.00 },
+            { logo: "", category: "", name: "🍵 Thé", price: 1.00 },
+            { logo: "", category: "", name: "🍹 Jus de fruit", price: 2.00 },
             {
-                category: "", name: "🥤 Soda", price: 2.50, options: [
-                    { category: "", name: "Coca Cola", price: null },
-                    { category: "", name: "Fanta", price: null },
-                    { category: "", name: "Thé glacé", price: null }]
+                logo: "", category: "", name: "🥤 Soda", price: 2.50, options: [
+                    { logo: "", category: "", name: "Coca Cola", price: null },
+                    { logo: "", category: "", name: "Fanta", price: null },
+                    { logo: "", category: "", name: "Thé glacé", price: null }]
             },
             {
-                category: "", name: "🍸 Sirop", price: 1.5, options: [
-                    { category: "", name: "Grenadine", price: null },
-                    { category: "", name: "Citron", price: null },
-                    { category: "", name: "Menthe", price: null },
-                    { category: "", name: "Pêche", price: null }]
+                logo: "", category: "", name: "🍸 Sirop", price: 1.5, options: [
+                    { logo: "", category: "", name: "Grenadine", price: null },
+                    { logo: "", category: "", name: "Citron", price: null },
+                    { logo: "", category: "", name: "Menthe", price: null },
+                    { logo: "", category: "", name: "Pêche", price: null }]
             },
             {
-                category: "", name: "🧉 Diabolo", price: 2, options: [
-                    { category: "", name: "Grenadine", price: null },
-                    { category: "", name: "Citron", price: null },
-                    { category: "", name: "Menthe", price: null },
-                    { category: "", name: "Pêche", price: null }]
+                logo: "", category: "", name: "🧉 Diabolo", price: 2, options: [
+                    { logo: "", category: "", name: "Grenadine", price: null },
+                    { logo: "", category: "", name: "Citron", price: null },
+                    { logo: "", category: "", name: "Menthe", price: null },
+                    { logo: "", category: "", name: "Pêche", price: null }]
             }
         ]
     },
     confiseries: {
         items: [
-            { category: "", name: "🍭 Bonbons", price: 1.00 },
+            { logo: "", category: "", name: "🍬 Bonbons", price: 1.00 },
             {
-                category: "", name: "🥞 Crêpes", price: null, options: [
-                    { category: "Crêpe", name: "Nature", price: 1.00 },
-                    { category: "Crêpe", name: "Sucre", price: 1.50 },
-                    { category: "Crêpe", name: "Chocolat", price: 2 }]
+                logo: "", category: "", name: "🥞 Crêpes", price: null, options: [
+                    { logo: "", category: "Crêpe", name: "Nature", price: 1.00 },
+                    { logo: "", category: "Crêpe", name: "Sucre", price: 1.50 },
+                    { logo: "", category: "Crêpe", name: "Chocolat", price: 2 }]
             }
         ],
         options: null
@@ -180,7 +180,7 @@ function openCategoryModal(catId) {
             if (item.options) {
                 openOptionsModal(item);
             } else {
-                addToTicket(`${item.category} ${item.name}`, item.price);
+                addToTicket(`${item.logo} ${item.category} ${item.name}`, item.price);
                 closeModal();
             }
         };
@@ -209,7 +209,7 @@ function openOptionsModal(item) {
         btn.textContent = label;
         btn.onclick = () => {
             const finalPrice = opt.price !== null ? opt.price : item.price;
-            addToTicket(`${item.category} ${item.name} (${opt.name})`, finalPrice);
+            addToTicket(`${opt.logo} ${item.category} ${item.name} (${opt.name})`, finalPrice);
             closeModal();
         };
         body.appendChild(btn);
