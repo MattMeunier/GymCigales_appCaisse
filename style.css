@@ -37,7 +37,7 @@ button:active {
 }
 
 .back-btn {
-    background-color: #999;
+    background-color: #7b7b7b;
 }
 
 #ticket {
@@ -119,7 +119,7 @@ button:active {
     background-color: white;
     border-radius: 8px;
     padding: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.201);
 }
 
 .modal-content {
@@ -225,16 +225,47 @@ button:active {
     box-sizing: border-box;
 }
 
+.big-button,
+.new-ticket-btn,
+.back-btn {
+    display: inline-block;
+    padding: 14px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 48px;
+    min-width: 140px;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.new-ticket-btn:hover {
+    background-color: #cdcdcd;
+    color: #28a745;
+}
+
+.big-button:hover {
+    background-color: #cdcdcd;
+    color: #0077cc;
+}
+
+.back-btn:hover {
+    background-color: #cdcdcd;
+    color: #7b7b7b;
+}
 
 @media (max-width: 480px) {
-    .modal .button-container button {
+    .modal .button-container .big-button .back-btn button {
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         border-radius: 0;
         padding: 16px;
-        font-size: 18px;
+        font-size: 1.4em;
         min-height: 52px;
     }
 }

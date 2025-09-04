@@ -184,6 +184,7 @@ function openCategoryModal(catId) {
                 closeModal();
             }
         };
+        btn.classList.add("big-button");
         body.appendChild(btn);
     });
 
@@ -212,6 +213,7 @@ function openOptionsModal(item) {
             addToTicket(`${opt.logo} ${item.category} ${item.name} (${opt.name})`, finalPrice);
             closeModal();
         };
+        btn.classList.add("big-button");
         body.appendChild(btn);
     });
 
