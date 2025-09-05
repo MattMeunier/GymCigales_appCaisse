@@ -275,23 +275,29 @@ function updateTicket() {
         libelleCell.textContent = item[0];
         row.appendChild(libelleCell);
 
-        // Quantité modifiable
+        // // Quantité modifiable
+        // const quantiteCell = document.createElement("td");
+        // const input = document.createElement("input");
+        // input.type = "number";
+        // input.min = "1";
+        // input.max = "99";
+        // input.value = item[1];
+        // input.classList.add("qty-input");
+        // input.addEventListener("change", (e) => {
+        //     const newQty = parseInt(e.target.value);
+        //     if (newQty > 0) {
+        //         item[1] = newQty;
+        //         adjustSaucissonPrices(); // gestion promo
+        //         updateTicket();
+        //     }
+        // });
+        // quantiteCell.appendChild(input);
+        // row.appendChild(quantiteCell);
+
+        // Quantité non modifiable
         const quantiteCell = document.createElement("td");
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "1";
-        input.max = "99";
-        input.value = item[1];
-        input.classList.add("qty-input");
-        input.addEventListener("change", (e) => {
-            const newQty = parseInt(e.target.value);
-            if (newQty > 0) {
-                item[1] = newQty;
-                adjustSaucissonPrices(); // gestion promo
-                updateTicket();
-            }
-        });
-        quantiteCell.appendChild(input);
+        quantiteCell.classList.add("qty-cell");
+        quantiteCell.textContent = item[1];
         row.appendChild(quantiteCell);
 
         // Prix
@@ -302,6 +308,7 @@ function updateTicket() {
 
         // Supprimer
         const deleteCell = document.createElement("td");
+        deleteCell.classList.add("td-suppr");
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "🗑️";
         deleteBtn.classList.add("btn-supprimer");

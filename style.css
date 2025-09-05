@@ -22,7 +22,6 @@ h1 {
 button {
     font-size: 20px;
     padding: 15px;
-    margin: 10px 0;
     /* width: 100%; */
     border: none;
     border-radius: 10px;
@@ -134,13 +133,8 @@ button:active {
     display: block;
     width: 100%;
     margin: 8px 0;
-    padding: 10px;
+    padding: 16px;
     font-size: 16px;
-}
-
-#ticket-body td {
-    padding: 8px;
-    text-align: center;
 }
 
 .qty-input {
@@ -165,11 +159,26 @@ button:active {
 #ticket-table th,
 #ticket-table td {
     border: 1px solid #ccc;
-    padding: 6px 8px;
+    /* padding: 6px 8px; */
     text-align: center;
     font-size: 14px;
-    line-height: 1.2;
+    /* line-height: 1.2; */
     border-bottom: 1px solid #ddd;
+}
+
+.th-supprimer,
+.td-suppr {
+    width: 55px;
+}
+
+.th-montant,
+.price-cell {
+    width: 80px;
+}
+
+.th-qty,
+.qty-cell {
+    width: 80px
 }
 
 .qty-input {
@@ -209,15 +218,15 @@ button:active {
     justify-content: center;
 }
 
-.button-container button {
+/* .button-container button {
     flex: 1 1 calc(50% - 8px);
     min-width: 120px;
     padding: 10px;
     font-size: 16px;
-}
+} */
 
 .modal .button-container button {
-    padding: 14px 16px;
+    padding: 16px;
     /* Hauteur verticale augmentée */
     font-size: 16px;
     /* Texte bien lisible */
@@ -232,7 +241,8 @@ button:active {
 .new-ticket-btn,
 .back-btn {
     display: inline-block;
-    padding: 14px 20px;
+    padding: 16px;
+    margin: 5px 0px;
     font-size: 1.2rem;
     font-weight: bold;
     min-height: 48px;
