@@ -164,7 +164,6 @@ button:active {
     font-size: 14px;
     /* line-height: 1.2; */
     border-bottom: 1px solid #ddd;
-    width: auto;
 }
 
 .th-supprimer,
@@ -180,6 +179,10 @@ button:active {
 .th-qty,
 .qty-cell {
     width: 80px
+}
+
+.th-libelle {
+    width: auto;
 }
 
 .qty-input {
