@@ -73,9 +73,14 @@ const categoriesData = {
     saucissons: {
         items: [
             { logo: "🍖", category: "Saucisson", name: "Nature", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Fumé", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Poivre", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Méridional", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Sanglier", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Basilic", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Beaufort", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Camembert", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Comté", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Herbes", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Piment espelette", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Noisette", price: 4.50 }
@@ -84,7 +89,12 @@ const categoriesData = {
     softs: {
         items: [
             { logo: "", category: "", name: "☕ Café", price: 1.00 },
-            { logo: "", category: "", name: "🍵 Thé", price: 1.00 },
+            {
+                logo: "", category: "", name: "🍵 Thé", price: 1.00, options: [
+                    { logo: "", category: "", name: "Earl Grey", price: null },
+                    { logo: "", category: "", name: "Citron", price: null },
+                    { logo: "", category: "", name: "Menthe", price: null }]
+            },
             { logo: "", category: "", name: "🍹 Jus de fruit", price: 2.00 },
             {
                 logo: "", category: "", name: "🥤 Soda", price: 2.50, options: [
@@ -110,7 +120,12 @@ const categoriesData = {
     },
     confiseries: {
         items: [
-            { logo: "", category: "", name: "🍬 Bonbons", price: 1.00 },
+            {
+                logo: "", category: "", name: "🍬 Bonbons", price: 1.00, options: [
+                    { logo: "", category: "", name: "Dragibus", price: null },
+                    { logo: "", category: "", name: "Schtroumpf", price: null },
+                    { logo: "", category: "", name: "Frites", price: null }]
+            },
             {
                 logo: "", category: "", name: "🥞 Crêpes", price: null, options: [
                     { logo: "", category: "Crêpe", name: "Nature", price: 1.00 },
