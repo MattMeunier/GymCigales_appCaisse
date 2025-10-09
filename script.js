@@ -53,21 +53,9 @@ const categoriesData = {
     },
     vins: {
         items: [
-            {
-                logo: "", category: "Vin", name: "Blanc", price: null, options: [
-                    { logo: "🍷", category: "Vin blanc", name: "Verre", price: 2.5 },
-                    { logo: "🍾", category: "Vin blanc", name: "Bouteille", price: 6.5 }]
-            },
-            {
-                logo: "", category: "Vin", name: "Rouge", price: null, options: [
-                    { logo: "🍷", category: "Vin rouge", name: "Verre", price: 2.5 },
-                    { logo: "🍾", category: "Vin rouge", name: "Bouteille", price: 6.5 }]
-            },
-            {
-                logo: "", category: "Vin", name: "Rosé", price: null, options: [
-                    { logo: "🍷", category: "Vin rosé", name: "Verre", price: 2.5 },
-                    { logo: "🍾", category: "Vin rosé", name: "Bouteille", price: 6.5 }]
-            }
+            { logo: "🍷", category: "Vin", name: "Blanc Layon", price: 2.00 },
+            { logo: "🍷", category: "Vin", name: "Rouge Anjou Bio", price: 2.50 },
+            { logo: "🍷", category: "Vin", name: "Rosé 1/2 sec", price: 1.50 }
         ],
     },
     saucissons: {
@@ -88,9 +76,9 @@ const categoriesData = {
     },
     softs: {
         items: [
-            { logo: "", category: "", name: "☕ Café", price: 1.00 },
+            { logo: "", category: "", name: "☕ Café", price: 0.50 },
             {
-                logo: "", category: "", name: "🍵 Thé", price: 1.00, options: [
+                logo: "", category: "", name: "🍵 Thé", price: 0.50, options: [
                     { logo: "", category: "", name: "Earl Grey", price: null },
                     { logo: "", category: "", name: "Citron", price: null },
                     { logo: "", category: "", name: "Menthe", price: null }]
@@ -99,18 +87,17 @@ const categoriesData = {
             {
                 logo: "", category: "", name: "🥤 Soda", price: 2.50, options: [
                     { logo: "", category: "", name: "Coca Cola", price: null },
-                    { logo: "", category: "", name: "Fanta", price: null },
                     { logo: "", category: "", name: "Thé glacé", price: null }]
             },
             {
-                logo: "", category: "", name: "🍸 Sirop", price: 1.5, options: [
+                logo: "", category: "", name: "🍸 Sirop", price: 1.50, options: [
                     { logo: "", category: "", name: "Grenadine", price: null },
                     { logo: "", category: "", name: "Citron", price: null },
                     { logo: "", category: "", name: "Menthe", price: null },
                     { logo: "", category: "", name: "Pêche", price: null }]
             },
             {
-                logo: "", category: "", name: "🧉 Diabolo", price: 2, options: [
+                logo: "", category: "", name: "🧉 Diabolo", price: 2.00, options: [
                     { logo: "", category: "", name: "Grenadine", price: null },
                     { logo: "", category: "", name: "Citron", price: null },
                     { logo: "", category: "", name: "Menthe", price: null },
@@ -130,7 +117,7 @@ const categoriesData = {
                 logo: "", category: "", name: "🥞 Crêpes", price: null, options: [
                     { logo: "", category: "Crêpe", name: "Nature", price: 1.00 },
                     { logo: "", category: "Crêpe", name: "Sucre", price: 1.50 },
-                    { logo: "", category: "Crêpe", name: "Chocolat", price: 2 }]
+                    { logo: "", category: "Crêpe", name: "Chocolat", price: 2.00 }]
             }
         ],
         options: null
