@@ -155,7 +155,7 @@ button:active {
 .btn-supprimer {
     padding: 0px;
     margin: 0px;
-    width: 35px;
+    width: 25px;
 }
 
 #ticket-table {
@@ -183,7 +183,9 @@ button:active {
 .td-moins,
 .th-qtyplus,
 .td-plus {
-    width: 35px;
+    margin: 0px;
+    padding: 0px;
+    width: 25px;
 }
 
 .th-montant,
