@@ -240,7 +240,7 @@ function addToTicket(label, price) {
 
     if (existingItem) {
         // Incrémente la quantité
-        existingItem[1] += 1;
+        existingItem[2] += 1;
     } else {
         ticket.push([label, 1, price.toFixed(2)]);
     }
@@ -300,16 +300,44 @@ function updateTicket() {
         // quantiteCell.appendChild(input);
         // row.appendChild(quantiteCell);
 
+        // Bouton -
+        let btnMoins = document.createElement("button");
+        btnMoins.textContent = "-";
+        btnMoins.className = "btn-moins";
+        cellMoins.appendChild(btnMoins);
+        btnMoins.addEventListener("click", () => {
+            if (qte > 1) {
+                qte--;
+                spanQte.textContent = qte;
+            } else {
+                row.remove();
+            }
+            adjustSaucissonPrices();
+            updateTicket();
+        });
+
         // Quantité non modifiable
         const quantiteCell = document.createElement("td");
         quantiteCell.classList.add("qty-cell");
-        quantiteCell.textContent = item[1];
+        quantiteCell.textContent = item[2];
         row.appendChild(quantiteCell);
+
+        // Bouton +
+        let btnPlus = document.createElement("button");
+        btnPlus.textContent = "+";
+        btnPlus.className = "btn-plus";
+        cellPlus.appendChild(btnPlus);
+        btnPlus.addEventListener("click", () => {
+            qte++;
+            spanQte.textContent = qte;
+            adjustSaucissonPrices();
+            updateTicket();
+        });
 
         // Prix
         const prixCell = document.createElement("td");
         prixCell.classList.add("price-cell");
-        prixCell.textContent = (item[2] * item[1]).toFixed(2) + " €";
+        prixCell.textContent = (item[4] * item[2]).toFixed(2) + " €";
         row.appendChild(prixCell);
 
         // Supprimer
@@ -323,6 +351,7 @@ function updateTicket() {
             adjustSaucissonPrices();
             updateTicket();
         });
+
         deleteCell.appendChild(deleteBtn);
         row.appendChild(deleteCell);
 
@@ -342,11 +371,11 @@ function clearTicket() {
 function adjustSaucissonPrices() {
     const totalSaucissons = ticket
         .filter(item => item[0].toLowerCase().includes("saucisson") && !item[0].toLowerCase().includes("pichet"))
-        .reduce((sum, item) => sum + item[1], 0);
+        .reduce((sum, item) => sum + item[2], 0);
 
     ticket.forEach(item => {
         if (item[0].toLowerCase().includes("saucisson") && !item[0].toLowerCase().includes("pichet")) {
-            item[2] = totalSaucissons >= 3 ? 4.00 : 4.50;
+            item[4] = totalSaucissons >= 3 ? 4.00 : 4.50;
         }
     });
 }
@@ -364,7 +393,7 @@ function updateLine(line) {
 }
 
 function updateChange() {
-    const total = ticket.reduce((sum, item) => sum + item[2] * item[1], 0);
+    const total = ticket.reduce((sum, item) => sum + item[4] * item[2], 0);
     const paidInput = document.getElementById("cash-amount");
     const changeDisplay = document.getElementById("change-amount");
 
@@ -374,23 +403,10 @@ function updateChange() {
     changeDisplay.textContent = change.toFixed(2) + " €";
 }
 
-// 2. Fonctions de mise à jour
-function updateLine(line) {
-    const price = parseFloat(line.dataset.price);
-    const qtyInput = line.querySelector('.qty-input');
-    let qty = parseInt(qtyInput.value, 10);
-    if (qty < 1) qty = 1;
-    qtyInput.value = qty;
-
-    const lineTotal = price * qty;
-    line.querySelector('.line-total').textContent = lineTotal.toFixed(2) + ' €';
-}
-
-
 function updateTotal() {
     let total = 0;
     ticket.forEach(item => {
-        total += item[2] * item[1];
+        total += item[4] * item[2];
     });
 
     document.getElementById("ticket-total").textContent = total.toFixed(2) + " €";
