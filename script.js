@@ -301,22 +301,22 @@ function updateTicket() {
         // row.appendChild(quantiteCell);
 
         // Bouton -
-        let tdbtmoins = document.createElement("td");
-        tdbtmoins.classList.add("td-moins");
-        const btnMoins = document.createElement("button");
-        btnMoins.textContent = "-";
-        btnMoins.classList.add("btn-moins");
-        tdbtmoins.appendChild(btnMoins);
-        btnMoins.addEventListener("click", () => {
-            if (item[2] > 1) {
-                item[2]--;
-                adjustSaucissonPrices();
-                updateTicket();
-            } else {
-                removeLine(index);
-            }
-        });
-        row.appendChild(tdbtmoins);
+        // let tdbtmoins = document.createElement("td");
+        // tdbtmoins.classList.add("td-moins");
+        // const btnMoins = document.createElement("button");
+        // btnMoins.textContent = "-";
+        // btnMoins.classList.add("btn-moins");
+        // tdbtmoins.appendChild(btnMoins);
+        // btnMoins.addEventListener("click", () => {
+        //     if (item[2] > 1) {
+        //         item[2]--;
+        //         adjustSaucissonPrices();
+        //         updateTicket();
+        //     } else {
+        //         removeLine(index);
+        //     }
+        // });
+        // row.appendChild(tdbtmoins);
 
         // Quantité non modifiable
         const quantiteCell = document.createElement("td");
@@ -324,7 +324,7 @@ function updateTicket() {
         quantiteCell.textContent = item[2];
         row.appendChild(quantiteCell);
 
-        // Bouton +
+        // Bouton +/-
         let tdbtplus = document.createElement("td");
         tdbtplus.classList.add("td-plus");
         const btnPlus = document.createElement("button");
@@ -336,6 +336,19 @@ function updateTicket() {
             item[2]++;
             adjustSaucissonPrices();
             updateTicket();
+        });
+        const btnMoins = document.createElement("button");
+        btnMoins.textContent = "-";
+        btnMoins.classList.add("btn-moins");
+        tdbtplus.appendChild(btnMoins);
+        btnMoins.addEventListener("click", () => {
+            if (item[2] > 1) {
+                item[2]--;
+                adjustSaucissonPrices();
+                updateTicket();
+            } else {
+                removeLine(index);
+            }
         });
         row.appendChild(tdbtplus);
 

@@ -154,8 +154,8 @@ button:active {
 .btn-moins,
 .btn-supprimer {
     padding: 0px;
-    margin: 0px;
-    width: 25px;
+    margin: 0px 5px;
+    width: 35px;
 }
 
 #ticket-table {
@@ -173,19 +173,17 @@ button:active {
     padding: 0px 8px;
     text-align: center;
     font-size: 16px;
-    /* line-height: 1.2; */
+    line-height: 1.7em;
     border-bottom: 1px solid #ddd;
 }
 
 .th-supprimer,
 .td-suppr,
-.th-qtymoins,
-.td-moins,
 .th-qtyplus,
 .td-plus {
     margin: 0px;
     padding: 0px;
-    width: 25px;
+    width: 35px;
 }
 
 .th-montant,
