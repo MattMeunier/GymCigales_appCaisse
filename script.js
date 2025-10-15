@@ -38,16 +38,16 @@ const categoriesData = {
                 logo: "", category: "🍻🍖 Bière", name: "Pichet + Saucisson", price: 12.00, options: [
                     { logo: "", category: "Saucisson", name: "Nature", price: null },
                     { logo: "", category: "Saucisson", name: "Fumé", price: null },
-                    { logo: "", category: "Saucisson", name: "Poivre", price: null },
-                    { logo: "", category: "Saucisson", name: "Méridional", price: null },
                     { logo: "", category: "Saucisson", name: "Sanglier", price: null },
+                    { logo: "", category: "Saucisson", name: "Poivre", price: null },
+                    { logo: "", category: "Saucisson", name: "Noisette", price: null },
+                    { logo: "", category: "Saucisson", name: "Herbes", price: null },
                     { logo: "", category: "Saucisson", name: "Basilic", price: null },
+                    { logo: "", category: "Saucisson", name: "Méridional", price: null },
+                    { logo: "", category: "Saucisson", name: "Piment espelette", price: null },
                     { logo: "", category: "Saucisson", name: "Beaufort", price: null },
                     { logo: "", category: "Saucisson", name: "Camembert", price: null },
-                    { logo: "", category: "Saucisson", name: "Comté", price: null },
-                    { logo: "", category: "Saucisson", name: "Herbes", price: null },
-                    { logo: "", category: "Saucisson", name: "Piment espelette", price: null },
-                    { logo: "", category: "Saucisson", name: "Noisette", price: null }
+                    { logo: "", category: "Saucisson", name: "Comté", price: null }
                 ]
             },
             { logo: "🍺", category: "", name: "Demi-Pêche", price: 3.00 },
@@ -66,16 +66,16 @@ const categoriesData = {
         items: [
             { logo: "🍖", category: "Saucisson", name: "Nature", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Fumé", price: 4.50 },
-            { logo: "🍖", category: "Saucisson", name: "Poivre", price: 4.50 },
-            { logo: "🍖", category: "Saucisson", name: "Méridional", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Sanglier", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Poivre", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Noisette", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Herbes", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Basilic", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Méridional", price: 4.50 },
+            { logo: "🍖", category: "Saucisson", name: "Piment espelette", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Beaufort", price: 4.50 },
             { logo: "🍖", category: "Saucisson", name: "Camembert", price: 4.50 },
-            { logo: "🍖", category: "Saucisson", name: "Comté", price: 4.50 },
-            { logo: "🍖", category: "Saucisson", name: "Herbes", price: 4.50 },
-            { logo: "🍖", category: "Saucisson", name: "Piment espelette", price: 4.50 },
-            { logo: "🍖", category: "Saucisson", name: "Noisette", price: 4.50 }
+            { logo: "🍖", category: "Saucisson", name: "Comté", price: 4.50 }
         ]
     },
     softs: {
