@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
     background: #f0f0f0;
     text-align: center;
-    padding: 20px;
+    padding: 0px;
 }
 
 h1 {
@@ -72,7 +72,7 @@ button:active {
     overflow: hidden;
     padding: 4px 8px;
     height: auto;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .ticket-line .content {
@@ -151,7 +151,8 @@ button:active {
 }
 
 .btn-plus,
-.btn-moins {
+.btn-moins,
+.btn-supprimer {
     padding: 0px;
     margin: 0px;
     width: 35px;
@@ -161,16 +162,17 @@ button:active {
     display: table;
     width: 100%;
     border-collapse: collapse;
-    padding: 6px;
-    font-size: 13px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
 }
 
 #ticket-table th,
 #ticket-table td {
     border: 1px solid #ccc;
-    /* padding: 6px 8px; */
+    padding: 0px 8px;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     /* line-height: 1.2; */
     border-bottom: 1px solid #ddd;
 }
@@ -191,7 +193,7 @@ button:active {
 
 .th-qty,
 .qty-cell {
-    width: 80px
+    width: 35px
 }
 
 .th-libelle {
@@ -293,9 +295,10 @@ button:active {
         left: 0;
         width: 100%;
         height: 100%;
+        padding: 0px;
+        margin: 0px;
         border-radius: 0;
-        padding: 16px;
-        font-size: 1.4em;
-        min-height: 52px;
+        font-size: 1em;
+        min-height: 42px;
     }
 }
