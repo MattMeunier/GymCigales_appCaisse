@@ -242,7 +242,7 @@ function addToTicket(label, price) {
         // Incrémente la quantité
         existingItem[2] += 1;
     } else {
-        ticket.push([label, 1, price.toFixed(2)]);
+        ticket.push([label, null, 1, null, price.toFixed(2)]);
     }
     // ✅ Réajuste les prix des saucissons si nécessaire
     adjustSaucissonPrices();
@@ -301,20 +301,22 @@ function updateTicket() {
         // row.appendChild(quantiteCell);
 
         // Bouton -
-        let btnMoins = document.createElement("button");
+        let tdbtmoins = document.createElement("td");
+        tdbtmoins.classList.add("td-moins");
+        const btnMoins = document.createElement("button");
         btnMoins.textContent = "-";
-        btnMoins.className = "btn-moins";
-        cellMoins.appendChild(btnMoins);
+        btnMoins.classList.add("btn-moins");
+        tdbtmoins.appendChild(btnMoins);
         btnMoins.addEventListener("click", () => {
-            if (qte > 1) {
-                qte--;
-                spanQte.textContent = qte;
+            if (item[2] > 1) {
+                item[2]--;
+                adjustSaucissonPrices();
+                updateTicket();
             } else {
-                row.remove();
+                removeLine(index);
             }
-            adjustSaucissonPrices();
-            updateTicket();
         });
+        row.appendChild(tdbtmoins);
 
         // Quantité non modifiable
         const quantiteCell = document.createElement("td");
@@ -323,16 +325,19 @@ function updateTicket() {
         row.appendChild(quantiteCell);
 
         // Bouton +
-        let btnPlus = document.createElement("button");
+        let tdbtplus = document.createElement("td");
+        tdbtplus.classList.add("td-plus");
+        const btnPlus = document.createElement("button");
         btnPlus.textContent = "+";
-        btnPlus.className = "btn-plus";
-        cellPlus.appendChild(btnPlus);
+        btnPlus.classList.add("btn-plus");
+        row.appendChild(btnPlus);
+        tdbtplus.appendChild(btnPlus);
         btnPlus.addEventListener("click", () => {
-            qte++;
-            spanQte.textContent = qte;
+            item[2]++;
             adjustSaucissonPrices();
             updateTicket();
         });
+        row.appendChild(tdbtplus);
 
         // Prix
         const prixCell = document.createElement("td");
@@ -347,11 +352,10 @@ function updateTicket() {
         deleteBtn.textContent = "🗑️";
         deleteBtn.classList.add("btn-supprimer");
         deleteBtn.addEventListener("click", () => {
-            ticket.splice(index, 1);
+            removeLine(index);
             adjustSaucissonPrices();
             updateTicket();
         });
-
         deleteCell.appendChild(deleteBtn);
         row.appendChild(deleteCell);
 

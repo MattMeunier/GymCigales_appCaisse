@@ -167,7 +167,11 @@ button:active {
 }
 
 .th-supprimer,
-.td-suppr {
+.td-suppr,
+.th-qtymoins,
+.td-moins,
+.th-qtyplus,
+.td-plus {
     width: 55px;
 }
 
