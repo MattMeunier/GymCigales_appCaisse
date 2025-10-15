@@ -146,6 +146,15 @@ button:active {
     border: none;
     cursor: pointer;
     font-size: 1.2em;
+    padding: 0px;
+    margin: 0px;
+}
+
+.btn-plus,
+.btn-moins {
+    padding: 0px;
+    margin: 0px;
+    width: 35px;
 }
 
 #ticket-table {
@@ -172,7 +181,7 @@ button:active {
 .td-moins,
 .th-qtyplus,
 .td-plus {
-    width: 55px;
+    width: 35px;
 }
 
 .th-montant,
