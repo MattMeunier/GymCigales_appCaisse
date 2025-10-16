@@ -57,9 +57,11 @@ const categoriesData = {
     },
     vins: {
         items: [
+            { logo: "🍷", category: "Vin", name: "Crémant rosé", price: 2.00 },
+            { logo: "🍷", category: "Vin", name: "Rosé 1/2 sec", price: 1.50 },
+            { logo: "🍷", category: "Vin", name: "Rouge Anjou Bio", price: 2.00 },
             { logo: "🍷", category: "Vin", name: "Blanc Layon", price: 2.00 },
-            { logo: "🍷", category: "Vin", name: "Rouge Anjou Bio", price: 2.50 },
-            { logo: "🍷", category: "Vin", name: "Rosé 1/2 sec", price: 1.50 }
+            { logo: "🍷", category: "Vin", name: "Blanc Savennières", price: 3.00 }
         ],
     },
     saucissons: {
