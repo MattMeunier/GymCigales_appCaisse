@@ -28,7 +28,7 @@ const payInput = document.getElementById('payment-amount');
 const changeDisplay = document.getElementById('change-amount');
 
 
-// État global
+// Data
 const categoriesData = {
     biere: {
         items: [
